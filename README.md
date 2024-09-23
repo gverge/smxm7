@@ -1,1 +1,1 @@
-# smxm7
+# SMX MP7 :: SERVEIS DE XARXA
