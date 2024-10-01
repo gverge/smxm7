@@ -56,7 +56,7 @@ Els següents són els tipus de paquets DHCP:
 - **DHCP information**: En tot moment el client pot sol·licitar més informació sobre la configuració de xarxa al servidor utilitzant un paquet DHCP information. En el paquet DHCP offer que el servidor envia al client, consten les informacions generals de configuració de xarxa que es trameten en l’oferta: adreça IP, màscara de xarxa, porta d’enllaç predeterminada, servidor DNS, fitxer a baixar i molts altres paràmetres que poden estar configurats per enviar-se en l’oferta.
 - **Renovació d'una IP concreta**: El client pot demanar continuar usant la mateixa IP amb un paquet DHCP request, i el servidor li pot concedir amb el paquet DHCP ACK. Si el servidor no li pot concedir (està en ús, no és de l’interval que gestiona, etc.) envia un DHCP NACK. 
 
-## Intervals, exclusions, concessions i reserves
+#### Intervals, exclusions, concessions i reserves
 Descrivim ara alguns dels aspectes més importants que formen part de la configuració DHCP.
 
 - **Interval**: conjunt d’adreces dinàmiques que el servidor té disponibles per assignar als clients. S’agrupen per oferir-se a les diverses subxarxes que atén el servidor. Una mateixa subxarxa pot disposar de diversos intervals.
@@ -81,4 +81,71 @@ subnet 140.220.191.0 netmask 255.255.255.0 {
  range 140.220.191.150 140.220.191.249;
  }
 ~~~
+## Instal·lació d'un servei DHCP
+El servei de xarxa DHCP està estructurat en forma de servei client/servidor; per tant, caldrà disposar del programari apropiat per fer cada un d’aquests rols. El programari que fa la funció de client usualment ja està integrat en el sistema operatiu (la part que gestiona la xarxa). Així doncs, quan parlem d’instal·lar un servei DHCP fem referència al procés d’instal·lació i configuració del programari del servidor DHCP. Evidentment també caldrà configurar els clients adequadament per fer ús d’aquest servei. 
 
+### Instal·lació del servei DHCP a Ubuntu Server (isc-dhcp-server)
+Tot i que aquest servei DHCP ha deixat d'estar mantingut per ISC en favor de KEA, continua sent avui dia el mes implantat en sistemes Linux. 
+- [Pàgina oficial ISC DHCP](https://www.isc.org/dhcp/)
+- [Manual ISC DHCP 4.4](https://kb.isc.org/docs/isc-dhcp-44-manual-pages-dhcpd)
+
+En primer lloc executem un update per obtenir els últims cadidats del paquet, posteriorment instal·lem el sercei i en comprovem l'estat (evidentment estarà caigut ja que encara no ha estat configurat):
+~~~
+# apt update
+# apt install isc-dhcp-server
+# systemcltl status isc-dhcp-server    
+~~~
+Iniciem la configuració del servei indicant quines interfícies s'utilitzaran per escoltar les peticions dels clients, al fitxer **`/etc/default/isc-dhcp-server`**:
+~~~
+# nano /etc/default/isc-dhcp-server
+ ...
+ INTERFACESv4=”enp0s….”
+ ...
+~~~
+Realitzem una configuració bàsica del servei al fixer **`/etc/dhcp/dhcpd.conf`**:
+~~~
+option domain-name "example.local";
+option domain-name-servers 8.8.8.8;
+default-lease-time 3600;
+max-lease-time 86400;
+ddns-update-style none;
+subnet 192.168.56.0 netmask 255.255.255.0 {
+       range 192.168.56.220 192.168.56.240;
+       option routers 192.168.56.10;
+}
+~~~
+Provem ara a iniciar el servei i comprovar el seu funcionament des d'un client de la xarxa. 
+Aquesta comprovació la podem realitzar des del client:
+- Configurem la xarxa per tal de rebre la informació necessaria de forma automàtica (DHCP).
+- Podem forçar l'alliberament d'una adreça ja asignada prèviament amb la comanda **`sudo dhclient -r -v`**
+- Podem sol·licitar una nova adreça amb la comanda **`sudo dhclient -v`**
+
+En cas de no aconseguir-ho podem comprovar els possibles errors amb la comanda **journalctl -xe**
+
+I també podem comprovar des del servidor:
+- Que la negociació s'ha realitzat correctament observant el log del servidor a **`/var/log/syslog`**
+- Que el registre de la concessió ha estat creat al fitxer de concessions **`/var/lib/dhcp/dhcpd.leases`**
+
+## Habilitant l'encaminament a Ubuntu Server
+Per tal que els nostres clients puguin sortir a internet a través del nostre servidor (que farà de porta d'enllaç) hem de realitzar dues configuracions adicionals.
+- Habilitar el forwarding des del fitxer **`/etc/sysctl.conf`** descomentant la següent línia i fent un **reboot** al servidor:
+  
+   `net.ipv4.ip_forward=1`
+  
+- Afegir una regla NAT d'enmascarament als paquets que surtin cap a internet:
+  
+   `# sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE`
+  
+Podem comprovar que aquesta regla s'ha afegit correctament amb la comanda:
+~~~
+# sudo iptables -t nat -L
+~~~
+Per aconseguir que aquestes regles no desapareixin al reiniciar el servidor instal·lem una eina que aconseguirà que siguin persistents:
+~~~
+# sudo apt install iptables-persistent
+~~~
+La regla es guardarà a: **`/etc/iptables/rules.v`**
+En cas d'afegir més regles posteriorment i voler desar-les també com a persistents, podem executar la comanda:
+~~~
+# iptables-save > /etc/iptables/rules.v4
+~~~
