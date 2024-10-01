@@ -56,3 +56,29 @@ Els següents són els tipus de paquets DHCP:
 - **DHCP information**: En tot moment el client pot sol·licitar més informació sobre la configuració de xarxa al servidor utilitzant un paquet DHCP information. En el paquet DHCP offer que el servidor envia al client, consten les informacions generals de configuració de xarxa que es trameten en l’oferta: adreça IP, màscara de xarxa, porta d’enllaç predeterminada, servidor DNS, fitxer a baixar i molts altres paràmetres que poden estar configurats per enviar-se en l’oferta.
 - **Renovació d'una IP concreta**: El client pot demanar continuar usant la mateixa IP amb un paquet DHCP request, i el servidor li pot concedir amb el paquet DHCP ACK. Si el servidor no li pot concedir (està en ús, no és de l’interval que gestiona, etc.) envia un DHCP NACK. 
 
+## Intervals, exclusions, concessions i reserves
+Descrivim ara alguns dels aspectes més importants que formen part de la configuració DHCP.
+
+- **Interval**: conjunt d’adreces dinàmiques que el servidor té disponibles per assignar als clients. S’agrupen per oferir-se a les diverses subxarxes que atén el servidor. Una mateixa subxarxa pot disposar de diversos intervals.
+~~~
+subnet 140.220.191.0 netmask 255.255.255.0 {
+ range 140.220.191.150 140.220.191.249;
+}
+subnet 239.252.197.0 netmask 255.255.255.0 {
+ range 239.252.197.10 239.252.197.107;
+ range 239.252.197.113 239.252.197.250;
+}
+~~~
+ - **Exclusions**: adreces IP que no s’ofereixen dinàmicament per part del servidor. És a dir, que no formen part de cap interval.
+ - **Concessions**: l’assignació d’una adreça IP i la resta de paràmetres de xarxa a un client és una concessió (o leasse). Els clients reben les concessions per períodes de temps finits, que en finalitzar, cal renegociar. Tant el client com el servidor s’anoten les concessions.
+- **Reserves**: anomenem reserves aquelles adreces IP que s’assignen via DHCP però de manera fixa, normalment a un equip amb una MAC o nom de host concret. 
+~~~
+subnet 140.220.191.0 netmask 255.255.255.0 {
+ host server {
+  hardware ethernet 08:00:2b:4c:59:23;
+  fixed-address 140.220.191.1;
+ }
+ range 140.220.191.150 140.220.191.249;
+ }
+~~~
+
