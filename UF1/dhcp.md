@@ -1,7 +1,11 @@
 # DHCP : Configuració Dinàmica de Sistemes
 
-### Índex
+### Índex de Contingut
 - [El servei DHCP](#punt1)
+- [El protocol DHCP i els seus components](#punt2)
+- [Instal·lació d'un servei DHCP](#punt3)
+- [Recursos DHCP](#punt4)
+
 
 
 DHCP és l’acrònim de dynamic host configuration protocol, en català, protocol de configuració dinàmica d’equips. 
@@ -32,7 +36,7 @@ Quan l’adreça IP i els altres paràmetres necessaris de configuració de la x
 
 Quan la configuració de xarxa d’un equip es rep per mitjà d’un servidor DHCP es diu que utilitza una adreça **IP dinàmica**. Aquesta adreça pot variar dins d’un interval d’adreces disponibles per al servidor DHCP o pot ser fixa. 
 
-## El protocol DHCP i els seus components
+## El protocol DHCP i els seus components<a name="punt2"></a>
 Tot protocol implica un diàleg entre els equips que hi intervenen, ens caldrà doncs analitzar quin és i com es produeix aquest diàleg. Finalment es descriurà el significat de termes tan usuals en DHCP com intervals, exclusions, concessions i reserves. 
 
 El protocol DHCP està basat en l’arquitectura de serveis **client-servidor** i utilitza com a transport el **protocol UDP** de la pila de protocols TCP/ IP. El servidor DHCP es comunica amb els clients utilitzant paquets UDP, que rep en el seu **port 67** i envia al **port 68 del client**. 
@@ -86,7 +90,7 @@ subnet 140.220.191.0 netmask 255.255.255.0 {
  range 140.220.191.150 140.220.191.249;
  }
 ~~~
-## Instal·lació d'un servei DHCP
+## Instal·lació d'un servei DHCP <a name="punt3"></a>
 El servei de xarxa DHCP està estructurat en forma de servei client/servidor; per tant, caldrà disposar del programari apropiat per fer cada un d’aquests rols. El programari que fa la funció de client usualment ja està integrat en el sistema operatiu (la part que gestiona la xarxa). Així doncs, quan parlem d’instal·lar un servei DHCP fem referència al procés d’instal·lació i configuració del programari del servidor DHCP. Evidentment també caldrà configurar els clients adequadament per fer ús d’aquest servei. 
 
 ### Instal·lació del servei DHCP a Ubuntu Server (isc-dhcp-server)
@@ -154,6 +158,6 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 ~~~
 # iptables-save > /etc/iptables/rules.v4
 ~~~
-## Recursos DHCP
+## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
 - [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
