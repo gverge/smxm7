@@ -164,6 +164,21 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 ~~~
 ### Instal·lació del servei DHCP a Windows <a name="punt3.2"></a>
 
+Per instal·lar el rol del servidor DHCP des de l'Administrador del Servidor. En l'arbre de característiques buscarem DHCP i el marcarem, afegint les característiques requerides.
+Un cop instal·lat se'ns ofereix la possibilitat de completar la configuració bàsica del servei, durant aquest breu procés es crearan els grups de seguretat necessaris per gestionar el servei. En acbar reiniciarem el servei per aplicar els canvis.
+
+Ara ja som en condicions de crear el nostre primer àmbit. ho farem des de **Inici>Eines Administratives>DHCP** on escollirem l'opció **Nou Àmbit** que apareixerà en fer botó dret sobre IPv4. A partir d'aquí podem definir una sèrie d'opcions com:
+- Nom i descripció de l'àmbit.
+- Rang d'adreces de concessió i la seva màscara.
+- Rang d'exclusions.
+- Durada de la concessió.
+- Altres opcions DHCP com:
+  - Porta d'enllaç.
+  - Nom de domini i servidors DNS.
+  - Servidors WINS.
+  
+Un cop configurades les opcions ja només ens quedarà activar l'àmbit i comprovar que el servei està actiu.
+
 ## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
 - [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
