@@ -139,7 +139,7 @@ I també podem comprovar des del servidor:
 - Que la negociació s'ha realitzat correctament observant el log del servidor a **`/var/log/syslog`**
 - Que el registre de la concessió ha estat creat al fitxer de concessions **`/var/lib/dhcp/dhcpd.leases`**
 
-## Habilitant l'encaminament a Ubuntu Server
+#### Habilitant l'encaminament a Ubuntu Server
 Per tal que els nostres clients puguin sortir a internet a través del nostre servidor (que farà de porta d'enllaç) hem de realitzar dues configuracions adicionals.
 - Habilitar el forwarding des del fitxer **`/etc/sysctl.conf`** descomentant la següent línia i fent un **reboot** al servidor:
   
