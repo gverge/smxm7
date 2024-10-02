@@ -149,3 +149,6 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 ~~~
 # iptables-save > /etc/iptables/rules.v4
 ~~~
+## Recursos DHCP
+- [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
+- [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
