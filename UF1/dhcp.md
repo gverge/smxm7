@@ -8,6 +8,9 @@
 
 <hr>
 
+
+
+## El servei DHCP <a name="punt1"></a>
 DHCP és l’acrònim de dynamic host configuration protocol, en català, protocol de configuració dinàmica d’equips. 
 
 #### Què fa el DHCP?
@@ -21,7 +24,7 @@ Tot equip de xarxa necessita disposar:
 - Una adreça de la porta d’enllaç predeterminada o passarel·la per defecte (o gateway), per disposar d’accés a xarxes externes.
 - Adreces dels servidors DNS a consultar.
 
-## El servei DHCP <a name="punt1"></a>
+
 El servei DHCP simplifica l’administració de la configuració dels equips de xarxa fent-la centralitzada, dinàmica i amb concessions per períodes de temps finits. 
 Els principals avantatges d’utilitzar DHCP són: 
 - Evitar conflictes d’adreces IP
