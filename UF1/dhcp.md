@@ -4,7 +4,7 @@
 - [El servei DHCP](#punt1)
 - [El protocol DHCP i els seus components](#punt2)
 - [Instal·lació d'un servei DHCP](#punt3)
- - [Instal·lació del servei DHCP a Ubuntu Serves](#punt3.1)
+  - [Instal·lació del servei DHCP a Ubuntu Serves](#punt3.1)
 - [Recursos DHCP](#punt4)
 
 <hr>
