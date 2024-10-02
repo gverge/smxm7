@@ -4,6 +4,7 @@
 - [El servei DHCP](#punt1)
 - [El protocol DHCP i els seus components](#punt2)
 - [Instal·lació d'un servei DHCP](#punt3)
+- - [Instal·lació del servei DHCP a Ubuntu Serves](#punt3.1)
 - [Recursos DHCP](#punt4)
 
 <hr>
@@ -96,7 +97,7 @@ subnet 140.220.191.0 netmask 255.255.255.0 {
 ## Instal·lació d'un servei DHCP <a name="punt3"></a>
 El servei de xarxa DHCP està estructurat en forma de servei client/servidor; per tant, caldrà disposar del programari apropiat per fer cada un d’aquests rols. El programari que fa la funció de client usualment ja està integrat en el sistema operatiu (la part que gestiona la xarxa). Així doncs, quan parlem d’instal·lar un servei DHCP fem referència al procés d’instal·lació i configuració del programari del servidor DHCP. Evidentment també caldrà configurar els clients adequadament per fer ús d’aquest servei. 
 
-### Instal·lació del servei DHCP a Ubuntu Server (isc-dhcp-server)
+### Instal·lació del servei DHCP a Ubuntu Server (isc-dhcp-server)<a name="punt3.1"></a>
 Tot i que aquest servei DHCP ha deixat d'estar mantingut per ISC en favor de KEA, continua sent avui dia el mes implantat en sistemes Linux. 
 - [Pàgina oficial ISC DHCP](https://www.isc.org/dhcp/)
 - [Manual ISC DHCP 4.4](https://kb.isc.org/docs/isc-dhcp-44-manual-pages-dhcpd)
