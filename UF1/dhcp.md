@@ -6,7 +6,7 @@
 - [Instal·lació d'un servei DHCP](#punt3)
 - [Recursos DHCP](#punt4)
 
-
+<hr>
 
 DHCP és l’acrònim de dynamic host configuration protocol, en català, protocol de configuració dinàmica d’equips. 
 
