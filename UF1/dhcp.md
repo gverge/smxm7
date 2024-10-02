@@ -139,6 +139,31 @@ I també podem comprovar des del servidor:
 - Que la negociació s'ha realitzat correctament observant el log del servidor a **`/var/log/syslog`**
 - Que el registre de la concessió ha estat creat al fitxer de concessions **`/var/lib/dhcp/dhcpd.leases`**
 
+#### Configuració de reserves
+En el següent codi configurem dos pools d'adreces, un per a clients coneguts i un altre per la resta. Afegim clients coneguts amb la directiva **`host`** declarant la seva MAC.
+~~~
+subnet 192.168.56.0 netmask 255.255.255.0 {
+        option routers 192.168.56.10;
+        pool{
+                range 192.168.56.220 192.168.56.240
+                allow known-clients;
+                deny unknown-clients;
+        }
+        pool{
+                range 192.168.56.100 192.168.56.120;
+                allow unknown-clients;
+        }
+
+        host clientUbuntu{
+                hardware ethernet 08:00:27:1B:17:6b;
+                #fixed-address 192.168.56.250;
+        }
+        host client2{hardware ethernet 11:22:33:44:55:66}
+}
+~~~
+
+
+
 #### Habilitant l'encaminament a Ubuntu Server
 Per tal que els nostres clients puguin sortir a internet a través del nostre servidor (que farà de porta d'enllaç) hem de realitzar dues configuracions adicionals.
 - Habilitar el forwarding des del fitxer **`/etc/sysctl.conf`** descomentant la següent línia i fent un **reboot** al servidor:
@@ -160,6 +185,7 @@ Per aconseguir que aquestes regles no desapareixin al reiniciar el servidor inst
 La regla es guardarà a: **`/etc/iptables/rules.v`**
 En cas d'afegir més regles posteriorment i voler desar-les també com a persistents, podem executar la comanda:
 ~~~
+# sudo su
 # iptables-save > /etc/iptables/rules.v4
 ~~~
 ### Instal·lació del servei DHCP a Windows <a name="punt3.2"></a>
