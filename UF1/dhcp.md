@@ -5,10 +5,10 @@
 - [El protocol DHCP i els seus components](#punt2)
 - [Instal·lació d'un servei DHCP](#punt3)
   - [Instal·lació del servei DHCP a Ubuntu Serves](#punt3.1)
+  - [Instal·lació del servei DHCP a Windows](#punt3.2)
 - [Recursos DHCP](#punt4)
 
 <hr>
-
 
 
 ## El servei DHCP <a name="punt1"></a>
@@ -162,6 +162,8 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 ~~~
 # iptables-save > /etc/iptables/rules.v4
 ~~~
+### Instal·lació del servei DHCP a Windows <a name="punt3.2"></a>
+
 ## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
 - [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
