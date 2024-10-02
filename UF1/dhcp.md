@@ -164,3 +164,5 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 ## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
 - [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
+- [Pàgina oficial ISC DHCP](https://www.isc.org/dhcp/)
+- [Manual ISC DHCP 4.4](https://kb.isc.org/docs/isc-dhcp-44-manual-pages-dhcpd)
