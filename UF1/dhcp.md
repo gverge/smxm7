@@ -164,7 +164,7 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 ~~~
 ### Instal·lació del servei DHCP a Windows <a name="punt3.2"></a>
 
-Per instal·lar el rol del servidor DHCP des de l'Administrador del Servidor. En l'arbre de característiques buscarem DHCP i el marcarem, afegint les característiques requerides.
+Per instal·lar el rol del servidor DHCP des de l'Administrador del Servidor, en l'arbre de característiques buscarem DHCP i el marcarem, afegint les característiques requerides.
 Un cop instal·lat se'ns ofereix la possibilitat de completar la configuració bàsica del servei, durant aquest breu procés es crearan els grups de seguretat necessaris per gestionar el servei. En acbar reiniciarem el servei per aplicar els canvis.
 
 Ara ja som en condicions de crear el nostre primer àmbit. ho farem des de **Inici>Eines Administratives>DHCP** on escollirem l'opció **Nou Àmbit** que apareixerà en fer botó dret sobre IPv4. A partir d'aquí podem definir una sèrie d'opcions com:
@@ -178,6 +178,17 @@ Ara ja som en condicions de crear el nostre primer àmbit. ho farem des de **Ini
   - Servidors WINS.
   
 Un cop configurades les opcions ja només ens quedarà activar l'àmbit i comprovar que el servei està actiu.
+
+#### Habilitant l'encaminament a Ubuntu Server
+Abans de començar ens hem d'assegurar de que les interfaces del server estan correctament configurades. Un cop realitzades les comprovacions anidrem a l'administrador del servidor per tal d'afegir un nou rol l'**Accés Remot**.
+En la pantalla de selecció de reveis del Rol, escollim **Routing** (comprovarem com d'afegeix automàticament l'accés directe i VPN, que més endavant utilitzarem) i seguim, deixem per defecte els serveis proposats per al Servidor WEB i procedim a instal·lar.
+
+Un cop instal·lat, el servei ja apareixera en el menú d'eines, el seleccionem i un cop accedim a la pantalla de configuració fem botó dret sobre el servidor i procedim a **Configurar i Habilitar el Servei**. Durant el procés d'instal·lació escollirem les opcions:
+- Traducció d'adreces de Xarxa (NAT). Aquest és el nostre objectiu, ja que pretenem encaminar paquets des de les nostres xarxes internes cap a Internet.
+- En la següent pantalla només ens queda seleccionar la interfície de sortida i finalitzar la configuració.
+
+Ja només ens queda comprovar que els nostres clients poden connectar amb xarxes remotes.
+
 
 ## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
