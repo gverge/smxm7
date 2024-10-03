@@ -242,8 +242,7 @@ Com es configura un DHCP a la xarxa?
 <p><img loading="lazy" decoding="async" class="size-full wp-image-718 aligncenter" src="Imatges/DHCP/dhcp-14.png" alt="dhcp-14" width="500" height="375"/></p>
 <p>Assegurar la ruta de la base de dades de DHCP i la còpia de seguretat de la mateixa. Molt útil en cas de corrupció o haver de recuperar-la. A ser possible, una bona pràctica és ubicar els fitxers en discs separats. No obstant, en aquest cas al ser un únic servidor, només prenc nota de la ubicació i clicar el botó <strong>Aceptar</strong>.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-719 aligncenter" src="Imatges/DHCP/dhcp-15.png" alt="dhcp-15" width="500" height="557"/></p>
-<p>Al tractar-se d&#8217;una instal·lació de xarxa amb un Active Directory, un punt clau és <strong>AUTORITZAR</strong> aquest servidor com DHCP. Però abans, fixar-se que a les opcions IPv4 i IPv6, al costat hi apareix un símbol de color vermell, indicant que no pot assignar adreces d&#8217;aquest tipus.</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-720 aligncenter" src="Imatges/DHCP/dhcp-17.png" alt="dhcp-17" width="500" height="383"/></p>
+
 <p>Botó dret damunt el nom del servidor, seleccionar <strong>Autorizar</strong>, sembla que no faci res, però si tornem a seleccionar el servidor amb el botó dret, ara surt la opció de NO autorizar. Si es reinicia el servei de DHCP, es pot observar que a les opcions IPv4 i IPv6 ara apareix al costat un símbol de color verd, indicant que pot assignar adreces d&#8217;aquest tipus.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-721 aligncenter" src="Imatges/DHCP/dhcp-18.png" alt="dhcp-18" width="500" height="382"/></p>
 <p>&nbsp;</p>
