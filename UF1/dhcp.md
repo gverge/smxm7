@@ -205,7 +205,7 @@ Ara ja som en condicions de crear el nostre primer àmbit. ho farem des de **Ini
   
 Un cop configurades les opcions ja només ens quedarà activar l'àmbit i comprovar que el servei està actiu.
 
-#### Habilitant l'encaminament a Ubuntu Server
+#### Habilitant l'encaminament a Windows Server
 Abans de començar ens hem d'assegurar de que les interfaces del server estan correctament configurades. Un cop realitzades les comprovacions anidrem a l'administrador del servidor per tal d'afegir un nou rol l'**Accés Remot**.
 En la pantalla de selecció de reveis del Rol, escollim **Routing** (comprovarem com d'afegeix automàticament l'accés directe i VPN, que més endavant utilitzarem) i seguim, deixem per defecte els serveis proposats per al Servidor WEB i procedim a instal·lar.
 
