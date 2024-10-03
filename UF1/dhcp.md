@@ -251,12 +251,6 @@ Com es configura un DHCP a la xarxa?
 <p><img loading="lazy" decoding="async" class="size-full wp-image-722 aligncenter" src="Imatges/DHCP/dhcp-19.png" alt="dhcp-19" width="500" height="270"/></p>
 <p>Botó dret damunt l&#8217;opció de <strong>IPv4</strong> i seleccionar <strong>Propiedades</strong>. Es mostra el quadre de diàleg de la configuració IPv4. Les opcions a configurar ja van una mica a gust del consumidor i les necessitats de la xarxa. Exposo les que normalment utilitzo.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-723 aligncenter" src="Imatges/DHCP/dhcp-20.png" alt="dhcp-20" width="500" height="579"/></p>
-<p><strong>Pestanya DNS.<br />
-</strong>Seleccionar <strong>Actualitzar sempre dinàmicament registres DNS A i PTR;</strong> <strong>Descartar registres A i PTR quan s&#8217;elimini la concessió</strong> per no deixar brossa al DNS. I tot i que no hi hauria d&#8217;haver equips Windows NT tirant avall, si potser que hi hagi Linux, Mac&#8217;s, switchs, etc…que amb seguretat no es registraran, per això també selecciono <strong>Actualizar dinámicamente registros DNS A y PTR</strong>&#8230;.</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-724 aligncenter" src="Imatges/DHCP/dhcp-21.png" alt="dhcp-21" width="500" height="579"/></p>
-<p><strong>Pestanya Protección de acceso a redes.<br />
-</strong>De moment la deixem tal qual, quan parli del NAC o la protecció de xarxa ja tornarem a aquesta opció.</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-725 aligncenter" src="Imatges/DHCP/dhcp-22.png" alt="dhcp-22" width="500" height="579"/></p>
 <p><strong>Pestanya Filtros.</strong><br />
 Llistes blanques i negres d&#8217;adreces MAC a les que assignar adreces IP. De moment no aplica.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-726 aligncenter" src="Imatges/DHCP/dhcp-23.png" alt="dhcp-23" width="500" height="579"/></p>
@@ -265,10 +259,6 @@ Permet posar el servei DHCP amb alta disponibilitat amb un altre servidor. De mo
 <p><img loading="lazy" decoding="async" class="size-full wp-image-727 aligncenter" src="Imatges/DHCP/dhcp-24.png" alt="dhcp-24" width="500" height="579"/></p>
 <p><strong>Pestanya Opciones avanzadas.</strong><br />
 <span style="color: #00a7e5;">Important!</span> Clicant el botó <strong>Credenciales</strong>, indicar les credencials d&#8217;un usuari de Active Directory (jo utilitzo usrDHCP amb contrasenya forta) per fer el registre d&#8217;equips al DNS. Si no s&#8217;especifica, no es registraran i desregistraran les IPs del DHCP.</p>
-<p>&nbsp;</p>
-<p><strong>*** Actualització 19 de gener 2016 ***</strong></p>
-<p>Hi ha un error de configuració en aquesta part que s&#8217;ha de completar amb l&#8217;entrada de <a href="/?p=8807">Zona de cerca inversa DNS amb DHCP.</p>
-<p><strong>******</strong></p>
 <p>&nbsp;</p>
 <p>El botó <strong>Enlaces</strong>, en cas que el servidor tingui més d&#8217;una targeta de xarxa, permet especificar per quina targeta en concret ha d&#8217;operar el servei.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-728 aligncenter" src="Imatges/DHCP/dhcp-25.png" alt="dhcp-25" width="500" height="579"/><br />
