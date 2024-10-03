@@ -215,30 +215,8 @@ Un cop instal·lat, el servei ja apareixera en el menú d'eines, el seleccionem 
 
 Ja només ens queda comprovar que els nostres clients poden connectar amb xarxes remotes.
 
-#### Instruccions detallades per a la instal·lació
+#### Instruccions detallades per a la instal·lació (agraïments [jmsonales](https://www.jmsolanes.net/))
 
-<p>En cada segment de xarxa només hi pot haver un sol server de DHCP, per tant, abans de muntar-ne un s&#8217;ha d&#8217;assegurar que no n&#8217;existeix cap altre. Una de les incidències més comunes que em trobo és, precisament, que s&#8217;afegeix un router o Wi-Fi amb el servei aixecat donant adreces diferents i, com a conseqüència, assignant als equips xarxes diferents.</p>
-<p>Una comprovació ràpida es pot fer posant un equip a la xarxa amb la configuració IP de la targeta de xarxa en mode automàtic. És com hauran d&#8217;estar configurats els equips que s&#8217;afegeixen a la xarxa i es vol que agafin adreça IP de manera automàtica.</p>
-<p>Botó dret damunt la icona del costat del rellotge representada per un connector de xarxa, seleccionar <strong>Abrir el Centro de redes y recursos compartidos</strong>.</p>
-<p><img decoding="async" class="aligncenter" src="Imatges/DHCP/dhcp-01.png" alt="dhcp-01" width="500" height="112" /></p>
-<p>A la banda esquerra, seleccionar <strong>Cambiar configuración del adaptador</strong>.</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-704 aligncenter" src="Imatges/DHCP/dhcp-02.png" alt="dhcp-02" width="500" height="189"/></p>
-<p>Clicar damunt la targeta de xarxa amb el botó dret del ratolí i seleccionar <strong>Propiedades</strong>.</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-705 aligncenter" src="Imatges/DHCP/dhcp-03.png" alt="dhcp-03" width="500" height="366" /></p>
-<p>Marcar l&#8217;opció <strong>Protocolo de Internet versión 4 (TCP/IPv4)</strong>. Clicar el botó <strong>Propiedades</strong>. Es mostra el quadre de diàleg de la configuració TCP/IP, seleccionar, en els dos apartats (IP i DNS), <strong>Obtener una dirección IP automáticamente</strong>. Acceptar els quadres de diàleg que han quedat oberts.</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-706 aligncenter" src="Imatges/DHCP/dhcp-04.png" alt="dhcp-04" width="500" height="300"/></p>
-<p>Comprovem quina adreça IP té l&#8217;equip. Obrir una sessió de consola de sistema i executar la instrucció:</p>
-<pre>ipconfig /all</pre>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-708 aligncenter" src="Imatges/DHCP/dhcp-16.png" alt="dhcp-16" width="500" height="279" /></p>
-<p>&nbsp;</p>
-<p>Comprovar que l&#8217;adreça IP obtinguda és una adreça <strong>APIPA</strong> (Automatic Private IP Addressing), una adreça d&#8217;assignació automàtica, per quan no es troba un DHCP o no està configurada manualment l&#8217;adreça.</p>
-<ul>
-<li>Les adreces APIPA IPv4 corresponen a una xarxa reservada de classe B i van des de la <strong>169.254.0.0</strong> fins a la <strong>169.254.255.255</strong>.</li>
-<li>Les adreces APIPA IPv6 (link-local) són les que comencen i s&#8217;ubiquen a la xarxa<strong> FE80::/64</strong>.</li>
-</ul>
-<p>Per tant, si el dispositiu té una adreça IPv4 que comença per 169.254.x.x, vol dir no s&#8217;ha trobat cap DHCP a la xarxa que li proporcionés una adreça IP. Aquest punt també va bé per diagnosticar problemes de peticions al DHCP, sobretot quan hi ha la xarxa segmentada amb VLANs i no es passen bé les peticions d&#8217;una VLAN a l&#8217;altre.</p>
-<p>&nbsp;</p>
-Com s&#8217;instal·la un DHCP a la xarxa?
 <p>El DHCP és un servei que es pot instal·lar en els mateixos servidors que fan de controlador de Active Directory, o bé en servidors dedicats. Depèn de la mida de la xarxa i la criticitat dels serveis. Divideix i venceràs!</p>
 <p>Per activar el rol o servei, cal anar a l&#8217;<strong>Administrador del servidor</strong>. Des de la pantalla principal, seleccionar <strong>Agregar roles y características</strong>.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-709 aligncenter" src="Imatges/DHCP/dhcp-05.png" alt="dhcp-05" width="500" height="375"/></p>
