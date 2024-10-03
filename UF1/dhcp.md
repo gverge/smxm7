@@ -215,7 +215,143 @@ Un cop instal·lat, el servei ja apareixera en el menú d'eines, el seleccionem 
 
 Ja només ens queda comprovar que els nostres clients poden connectar amb xarxes remotes.
 
-<img src="Imatges/DHCP/dhcp-01.png"></image>
+#### Instruccions detallades per a la instal·lació
+
+<p>En cada segment de xarxa només hi pot haver un sol server de DHCP, per tant, abans de muntar-ne un s&#8217;ha d&#8217;assegurar que no n&#8217;existeix cap altre. Una de les incidències més comunes que em trobo és, precisament, que s&#8217;afegeix un router o Wi-Fi amb el servei aixecat donant adreces diferents i, com a conseqüència, assignant als equips xarxes diferents.</p>
+<p>Una comprovació ràpida es pot fer posant un equip a la xarxa amb la configuració IP de la targeta de xarxa en mode automàtic. És com hauran d&#8217;estar configurats els equips que s&#8217;afegeixen a la xarxa i es vol que agafin adreça IP de manera automàtica.</p>
+<p>Botó dret damunt la icona del costat del rellotge representada per un connector de xarxa, seleccionar <strong>Abrir el Centro de redes y recursos compartidos</strong>.</p>
+<p><img decoding="async" class="aligncenter" src="Imatges/DHCP/dhcp-01.png" alt="dhcp-01" width="500" height="112" /></p>
+<p>A la banda esquerra, seleccionar <strong>Cambiar configuración del adaptador</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-704 aligncenter" src="Imatges/DHCP/dhcp-02.png" alt="dhcp-02" width="500" height="189"/></p>
+<p>Clicar damunt la targeta de xarxa amb el botó dret del ratolí i seleccionar <strong>Propiedades</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-705 aligncenter" src="Imatges/DHCP/dhcp-03.png" alt="dhcp-03" width="500" height="366" /></p>
+<p>Marcar l&#8217;opció <strong>Protocolo de Internet versión 4 (TCP/IPv4)</strong>. Clicar el botó <strong>Propiedades</strong>. Es mostra el quadre de diàleg de la configuració TCP/IP, seleccionar, en els dos apartats (IP i DNS), <strong>Obtener una dirección IP automáticamente</strong>. Acceptar els quadres de diàleg que han quedat oberts.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-706 aligncenter" src="Imatges/DHCP/dhcp-04.png" alt="dhcp-04" width="500" height="300"/></p>
+<p>Comprovem quina adreça IP té l&#8217;equip. Obrir una sessió de consola de sistema i executar la instrucció:</p>
+<pre>ipconfig /all</pre>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-708 aligncenter" src="Imatges/DHCP/dhcp-16.png" alt="dhcp-16" width="500" height="279" /></p>
+<p>&nbsp;</p>
+<p>Comprovar que l&#8217;adreça IP obtinguda és una adreça <strong>APIPA</strong> (Automatic Private IP Addressing), una adreça d&#8217;assignació automàtica, per quan no es troba un DHCP o no està configurada manualment l&#8217;adreça.</p>
+<ul>
+<li>Les adreces APIPA IPv4 corresponen a una xarxa reservada de classe B i van des de la <strong>169.254.0.0</strong> fins a la <strong>169.254.255.255</strong>.</li>
+<li>Les adreces APIPA IPv6 (link-local) són les que comencen i s&#8217;ubiquen a la xarxa<strong> FE80::/64</strong>.</li>
+</ul>
+<p>Per tant, si el dispositiu té una adreça IPv4 que comença per 169.254.x.x, vol dir no s&#8217;ha trobat cap DHCP a la xarxa que li proporcionés una adreça IP. Aquest punt també va bé per diagnosticar problemes de peticions al DHCP, sobretot quan hi ha la xarxa segmentada amb VLANs i no es passen bé les peticions d&#8217;una VLAN a l&#8217;altre.</p>
+<p>&nbsp;</p>
+Com s&#8217;instal·la un DHCP a la xarxa?
+<p>El DHCP és un servei que es pot instal·lar en els mateixos servidors que fan de controlador de Active Directory, o bé en servidors dedicats. Depèn de la mida de la xarxa i la criticitat dels serveis. Divideix i venceràs!</p>
+<p>Per activar el rol o servei, cal anar a l&#8217;<strong>Administrador del servidor</strong>. Des de la pantalla principal, seleccionar <strong>Agregar roles y características</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-709 aligncenter" src="Imatges/DHCP/dhcp-05.png" alt="dhcp-05" width="500" height="375"/></p>
+<p>Seleccionar<strong> Instalación basada en características o en roles</strong>. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-710 aligncenter" src="Imatges/DHCP/dhcp-06.png" alt="dhcp-06" width="500" height="354"/></p>
+<p>Seleccionar <strong>un servidor del grupo de servidores</strong>. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-711 aligncenter" src="Imatges/DHCP/dhcp-07.png" alt="dhcp-07" width="500" height="354"/></p>
+<p>De la llista desplegable, marcar <strong>Servidor DHCP</strong>. Al fer-ho, demana per afegir les característiques necessàries pel DHCP. Clicar el botó <strong>Agregar características, </strong>de nou a la pantalla de selecció, clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-712 aligncenter" src="Imatges/DHCP/dhcp-08.png" alt="dhcp-08" width="500" height="317"/></p>
+<p>Deixar les característiques marcades per defecte, clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-713 aligncenter" src="Imatges/DHCP/dhcp-09.png" alt="dhcp-09" width="500" height="354"/></p>
+<p>Informació del DHCP, bàsicament diu que s&#8217;ha de configurar un cop instal·lat. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-714 aligncenter" src="Imatges/DHCP/dhcp-10.png" alt="dhcp-10" width="500" height="354"/></p>
+<p>Resum de les accions a fer. Clicar el botó <strong>Instalar</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-715 aligncenter" src="Imatges/DHCP/dhcp-11.png" alt="dhcp-11" width="500" height="354"/></p>
+<p>Acabada la instal·lació, clicar el botó <strong>Cerrar</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-716 aligncenter" src="Imatges/DHCP/dhcp-12.png" alt="dhcp-12" width="500" height="354"/></p>
+<p>Ara tenim el servei instal·lat, però com que no està configurat, no és operatiu, no assigna adreces IP.</p>
+Com es configura un DHCP a la xarxa?
+<p>Des de l&#8217;<strong>Administrador del servidor</strong>, seleccionar <strong>DHCP</strong> (assistents) o bé obrir l&#8217;<strong>administrador de DHCP</strong> de les eines administratives. Personalment, no sóc massa amic dels assistents, pel que aniré directe al gra obrint directament l&#8217;administrador de DHCP.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-717 aligncenter" src="Imatges/DHCP/dhcp-13.png" alt="dhcp-13" width="500" height="375"/></p>
+<p>Comencem configurant el propi servidor. Seleccionar el nom del servidor, botó dret &gt; <strong>Propiedades</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-718 aligncenter" src="Imatges/DHCP/dhcp-14.png" alt="dhcp-14" width="500" height="375"/></p>
+<p>Assegurar la ruta de la base de dades de DHCP i la còpia de seguretat de la mateixa. Molt útil en cas de corrupció o haver de recuperar-la. A ser possible, una bona pràctica és ubicar els fitxers en discs separats. No obstant, en aquest cas al ser un únic servidor, només prenc nota de la ubicació i clicar el botó <strong>Aceptar</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-719 aligncenter" src="Imatges/DHCP/dhcp-15.png" alt="dhcp-15" width="500" height="557"/></p>
+<p>Al tractar-se d&#8217;una instal·lació de xarxa amb un Active Directory, un punt clau és <strong>AUTORITZAR</strong> aquest servidor com DHCP. Però abans, fixar-se que a les opcions IPv4 i IPv6, al costat hi apareix un símbol de color vermell, indicant que no pot assignar adreces d&#8217;aquest tipus.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-720 aligncenter" src="Imatges/DHCP/dhcp-17.png" alt="dhcp-17" width="500" height="383"/></p>
+<p>Botó dret damunt el nom del servidor, seleccionar <strong>Autorizar</strong>, sembla que no faci res, però si tornem a seleccionar el servidor amb el botó dret, ara surt la opció de NO autorizar. Si es reinicia el servei de DHCP, es pot observar que a les opcions IPv4 i IPv6 ara apareix al costat un símbol de color verd, indicant que pot assignar adreces d&#8217;aquest tipus.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-721 aligncenter" src="Imatges/DHCP/dhcp-18.png" alt="dhcp-18" width="500" height="382"/></p>
+<p>&nbsp;</p>
+<p>Després de reiniciar:</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-722 aligncenter" src="Imatges/DHCP/dhcp-19.png" alt="dhcp-19" width="500" height="270"/></p>
+<p>Botó dret damunt l&#8217;opció de <strong>IPv4</strong> i seleccionar <strong>Propiedades</strong>. Es mostra el quadre de diàleg de la configuració IPv4. Les opcions a configurar ja van una mica a gust del consumidor i les necessitats de la xarxa. Exposo les que normalment utilitzo.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-723 aligncenter" src="Imatges/DHCP/dhcp-20.png" alt="dhcp-20" width="500" height="579"/></p>
+<p><strong>Pestanya DNS.<br />
+</strong>Seleccionar <strong>Actualitzar sempre dinàmicament registres DNS A i PTR;</strong> <strong>Descartar registres A i PTR quan s&#8217;elimini la concessió</strong> per no deixar brossa al DNS. I tot i que no hi hauria d&#8217;haver equips Windows NT tirant avall, si potser que hi hagi Linux, Mac&#8217;s, switchs, etc…que amb seguretat no es registraran, per això també selecciono <strong>Actualizar dinámicamente registros DNS A y PTR</strong>&#8230;.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-724 aligncenter" src="Imatges/DHCP/dhcp-21.png" alt="dhcp-21" width="500" height="579"/></p>
+<p><strong>Pestanya Protección de acceso a redes.<br />
+</strong>De moment la deixem tal qual, quan parli del NAC o la protecció de xarxa ja tornarem a aquesta opció.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-725 aligncenter" src="Imatges/DHCP/dhcp-22.png" alt="dhcp-22" width="500" height="579"/></p>
+<p><strong>Pestanya Filtros.</strong><br />
+Llistes blanques i negres d&#8217;adreces MAC a les que assignar adreces IP. De moment no aplica.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-726 aligncenter" src="Imatges/DHCP/dhcp-23.png" alt="dhcp-23" width="500" height="579"/></p>
+<p><strong>Pestanya Conmutación por error.</strong><br />
+Permet posar el servei DHCP amb alta disponibilitat amb un altre servidor. De moment no aplica.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-727 aligncenter" src="Imatges/DHCP/dhcp-24.png" alt="dhcp-24" width="500" height="579"/></p>
+<p><strong>Pestanya Opciones avanzadas.</strong><br />
+<span style="color: #00a7e5;">Important!</span> Clicant el botó <strong>Credenciales</strong>, indicar les credencials d&#8217;un usuari de Active Directory (jo utilitzo usrDHCP amb contrasenya forta) per fer el registre d&#8217;equips al DNS. Si no s&#8217;especifica, no es registraran i desregistraran les IPs del DHCP.</p>
+<p>&nbsp;</p>
+<p><strong>*** Actualització 19 de gener 2016 ***</strong></p>
+<p>Hi ha un error de configuració en aquesta part que s&#8217;ha de completar amb l&#8217;entrada de <a href="/?p=8807">Zona de cerca inversa DNS amb DHCP.</p>
+<p><strong>******</strong></p>
+<p>&nbsp;</p>
+<p>El botó <strong>Enlaces</strong>, en cas que el servidor tingui més d&#8217;una targeta de xarxa, permet especificar per quina targeta en concret ha d&#8217;operar el servei.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-728 aligncenter" src="Imatges/DHCP/dhcp-25.png" alt="dhcp-25" width="500" height="579"/><br />
+Clicar el botó <strong>Aceptar</strong>, quan tot sigui del vostre gust.</p>
+<p>Seleccionar la carpeta <strong>Opciones de servidor</strong>, botó dret, seleccionar <strong>Configurar opciones</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-730 aligncenter" src="Imatges/DHCP/dhcp-26.png" alt="dhcp-26" width="500" height="270"/></p>
+<p>Aquest apartat permet definir les opcions <strong><span style="color: #00a7e5;">GENERALS</span> </strong>per la xarxa, com per exemple, els servidors de DNS, el domini de DNS. Marcar les opcions:</p>
+<ul>
+<li>Servidores de DNS. Afegir a la llista les adreces IP dels servidors DNS de la xarxa.</li>
+<li>Nombre de dominio DNS. Indicar el nom FQDN, seguint l&#8217;exemple: laboratoris.local</li>
+</ul>
+<p>Clicar el botó <strong>Aceptar</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-729 aligncenter" src="Imatges/DHCP/dhcp-27.png" alt="dhcp-27" width="500" height="557"/></p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-731 aligncenter" src="Imatges/DHCP/dhcp-28.png" alt="dhcp-28" width="500" height="375"/></p>
+<p>&nbsp;</p>
+Crear àmbits d&#8217;adreces
+<p>Amb les opcions específiques definides, toca crear els àmbits d&#8217;adreces, és a dir, les diferents subxarxes que han d&#8217;assignar adreces IP. Aquí només se&#8217;n configura un, però en el cas de les VLANs, s&#8217;ha de definir un àmbit per cada una d&#8217;elles a les que es vol assignar adreces IP. Pels que teniu dubtes amb les VLANs, no s&#8217;ha de crear un servidor DHCP per a cada VLAN, sinó un sol servidor gestiona les IPs de totes les VLANs (indicant a l&#8217;encaminador els salts, és clar).</p>
+<p>Botó dret damunt <strong>IPv4</strong>, seleccionar <strong>Ámbito nuevo</strong>. S&#8217;inicia l&#8217;assistent per la seva creació. Botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-732 aligncenter" src="Imatges/DHCP/dhcp-29.png" alt="dhcp-29" width="500" height="407"/></p>
+<p>Indicar el nom i la descripció de l&#8217;àmbit. Per exemple: Xarxa local (xarxa servidors, xarxa usuaris, xarxa industrials, etc&#8230;). Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-733 aligncenter" src="Imatges/DHCP/dhcp-30.png" alt="dhcp-30" width="500" height="407"/></p>
+<p>Indicar IP inicial i final (ull, indicar IP de host, excloure l&#8217;ID de xarxa i broadcast) i la màscara. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-734 aligncenter" src="Imatges/DHCP/dhcp-31.png" alt="dhcp-31" width="500" height="407"/></p>
+<p>Rang d&#8217;adreces excloses, les que no es poden assignar automàticament. Reservar el rang d&#8217;adreces que s&#8217;assignen manualment, com poden ser els servidors, impressores, encaminadors, tallafocs, commutadors…Seguint l&#8217;exemple, afegeixo de la 192.168.0.1 a la 192.168.0.30 que és on posaré aquests dispositius. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-735 aligncenter" src="Imatges/DHCP/dhcp-32.png" alt="dhcp-32" width="500" height="407"/></p>
+<p>Temps de la concessió, és a dir, temps en que l&#8217;adreça IP estarà reservada per una MAC en concret. En les xarxes sense moviment d&#8217;equips es pot deixar a 8 dies. En xarxes Wi-Fi o que tenen molt de moviment d&#8217;equips (separat per VLANs, poden ser les zones de conferència, cafeteries, visites&#8230;) baixar el número a 2 o 4 hores, per no quedar-nos sense IPs.</p>
+<blockquote><p>Recordar que per la pròpia arquitectura del DHCP, un client farà la petició de renovació quan arribi a la meitat del temps de concessió. Rebaixar inadequadament aquests temps pot implicar més tràfic i càrrega a la xarxa innecessari.</p></blockquote>
+<p>Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-736 aligncenter" src="Imatges/DHCP/dhcp-33.png" alt="dhcp-33" width="500" height="407"/></p>
+<p>L&#8217;assistent dóna la possibilitat de configurar les opcions específiques per l&#8217;àmbit, com pot ser la porta d&#8217;enllaç. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-737 aligncenter" src="Imatges/DHCP/dhcp-34.png" alt="dhcp-34" width="500" height="407"/></p>
+<p>Precisament aquesta és la primera opció, especificar la porta d&#8217;enllaç per la xarxa de l&#8217;àmbit. <strong>Cada àmbit tindrà una porta d&#8217;enllaç diferent</strong>, de la seva pròpia subxarxa. Indicar el que correspon, afegir-lo a la llista i clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-738 aligncenter" src="Imatges/DHCP/dhcp-35.png" alt="dhcp-35" width="500" height="407"/></p>
+<p>Pel <span style="color: #00a7e5;">servei de DNS</span>, recupera la configuració de l&#8217;equip. Es pot deixar tal qual ja què prevaldran les opcions del servidor configurades anteriorment. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-739 aligncenter" src="Imatges/DHCP/dhcp-36.png" alt="dhcp-36" width="500" height="407"/></p>
+<p><span style="color: #00a7e5;">Servei de WINS</span>. No em digueu que encara teniu equips Windows 2000 o serveis NetBIOS a la xarxa? Doncs això, ho deixem en blanc. Clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-740 aligncenter" src="Imatges/DHCP/dhcp-37.png" alt="dhcp-37" width="500" height="407"/></p>
+<p>Es pot activar l&#8217;àmbit o deixar en pausa, útil per anar configurant sense modificar configuracions. En aquest cas <strong>toca activar-lo</strong>, clicar el botó <strong>Siguiente</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-741 aligncenter" src="Imatges/DHCP/dhcp-38.png" alt="dhcp-38" width="500" height="407"/></p>
+<p>Ja s&#8217;ha acabat la configuració de l&#8217;àmbit, clicar botó <strong>Finalizar</strong>.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-743 aligncenter" src="Imatges/DHCP/dhcp-39.png" alt="dhcp-39" width="500" height="407"/></p>
+<p>Repassant una mica les opcions que han quedat configurades en l&#8217;àmbit:</p>
+<p><strong>Conjunto de direcciones.<br />
+</strong> Per poder excloure adreces IP de l&#8217;assignació automàtica. Es pot veure el rang que distribueix: 192.168.0.1 a 192.168.0.254 i un rang exclòs: 192.168.0.1 fins a 192.168.0.30.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-742 aligncenter" src="Imatges/DHCP/dhcp-41.png" alt="dhcp-41" width="500" height="182"/></p>
+<p><strong>Concesiones de direcciones.</strong><br />
+Les adreces que ha assignat el DHCP, a qui ho ha fet i quina duració. Com que encara ningú ha fet petició no en surt cap.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-744 aligncenter" src="Imatges/DHCP/dhcp-42.png" alt="dhcp-42" width="500" height="186"/></p>
+<p><strong>Reserves.</strong><br />
+Si es vol assignar una adreça IP sempre al mateix equip, en aquest apartat, s&#8217;especifica l&#8217;adreça MAC de l&#8217;equip i la IP que se li ha d&#8217;assignar. L&#8217;adreça IP no s&#8217;assignarà a ningú més, encara que l&#8217;equip no es connecti mai.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-745 aligncenter" src="Imatges/DHCP/dhcp-43.png" alt="dhcp-43" width="500" height="217"/></p>
+<p>&nbsp;</p>
+<p><strong>Opcions d&#8217;àmbit.</strong><br />
+Les opcions específiques per l&#8217;àmbit (l&#8217;encaminador). L&#8217;assistent ha afegit els servidors DNS i nom de domini DNS, com que ja s&#8217;han definit en les opcions de servidor, els eliminem per no crear confusió.</p>
+<p><strong>Directivas.</strong><br />
+Permet assignar opcions específiques (opció de NTP per telèfons de veu IP, per exemple) segons l&#8217;identificador o característiques del dispositiu. No acostumo a utilitzar aquest apartat.</p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-746 aligncenter" src="Imatges/DHCP/dhcp-44.png" alt="dhcp-44" width="500" height="375"/></p>
+<p>Arribats a aquest punt, <span style="color: #00a7e5;">ja tenim un servidor de DHCP operatiu a la xarxa!</span></p>
+
+
+
 ## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
 - [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
