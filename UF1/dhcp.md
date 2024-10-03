@@ -257,9 +257,7 @@ Llistes blanques i negres d&#8217;adreces MAC a les que assignar adreces IP. De 
 <p><strong>Pestanya Conmutación por error.</strong><br />
 Permet posar el servei DHCP amb alta disponibilitat amb un altre servidor. De moment no aplica.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-727 aligncenter" src="Imatges/DHCP/dhcp-24.png" alt="dhcp-24" width="500" height="579"/></p>
-<p><strong>Pestanya Opciones avanzadas.</strong><br />
-<span style="color: #00a7e5;">Important!</span> Clicant el botó <strong>Credenciales</strong>, indicar les credencials d&#8217;un usuari de Active Directory (jo utilitzo usrDHCP amb contrasenya forta) per fer el registre d&#8217;equips al DNS. Si no s&#8217;especifica, no es registraran i desregistraran les IPs del DHCP.</p>
-<p>&nbsp;</p>
+
 <p>El botó <strong>Enlaces</strong>, en cas que el servidor tingui més d&#8217;una targeta de xarxa, permet especificar per quina targeta en concret ha d&#8217;operar el servei.</p>
 <p><img loading="lazy" decoding="async" class="size-full wp-image-728 aligncenter" src="Imatges/DHCP/dhcp-25.png" alt="dhcp-25" width="500" height="579"/><br />
 Clicar el botó <strong>Aceptar</strong>, quan tot sigui del vostre gust.</p>
