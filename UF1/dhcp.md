@@ -215,7 +215,7 @@ Un cop instal·lat, el servei ja apareixera en el menú d'eines, el seleccionem 
 
 Ja només ens queda comprovar que els nostres clients poden connectar amb xarxes remotes.
 
-
+<img src="Imatges/DHCP/dhcp-01.png"></image>
 ## Recursos DHCP<a name="punt4"></a>
 - [Tutorial del servei DHCP a FPGenred](https://www.fpgenred.es/DHCP/index.html)
 - [Material DHCP al ioc](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a1/continguts.html)
