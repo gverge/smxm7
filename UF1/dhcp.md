@@ -191,6 +191,8 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 
 #### Administració remota per ssh a Ubuntu Server
 
+‼️Noteu que les comandes que es descriuren no s'executen com a root (sudo) si no com l'usuari que volem utilitzar per fer la connexió des del client (en el nostre cas alumne).
+
 En primer lloc ens hem de crear un parell de claus al nostre equip amfitrió (des d'on iniciarem la connexió remota al server).
 
 ``# ssh-keygen`` deixarem totes les opcions per defecte i ‼️NO INDICAREM CAP CONTRASENYA PER AQUESTES CLAUS‼️ ja que la nostra intenció es automatitzar les connexions amb el servidor.
