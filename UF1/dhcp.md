@@ -192,10 +192,13 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 #### Administració remota per ssh a Ubuntu Server
 
 En primer lloc ens hem de crear un parell de claus al nostre equip amfitrió (des d'on iniciarem la connexió remota al server).
+
 ``# ssh-keygen`` deixarem totes les opcions per defecte i ‼️NO INDICAREM CAP CONTRASENYA PER AQUESTES CLAUS‼️ ja que la nostra intenció es automatitzar les connexions amb el servidor.
 
 Podem comprovar que les claus apareixen en el subdirectori ocult ``.ssh`` del nostre home.
-Un cop disposem del nostre parell de claus simplement haurem d'afegir la clau pública al servidor amb la comanda ``# ssh-copy-id alumne@192.168.56.10``. Tingueu en compte que el nom d'usuari serà el que vulgueu utilitzar quan realitzareu les connexions remotes (penseu si us interessa més un usuari del sistema o disposar d'un usuari root) i la IP ha de correspondre amb el vostre server.
+Un cop disposem del nostre parell de claus simplement haurem d'afegir la clau pública al servidor amb la comanda 
+
+``# ssh-copy-id alumne@192.168.56.10``. Tingueu en compte que el nom d'usuari serà el que vulgueu utilitzar quan realitzareu les connexions remotes (penseu si us interessa més un usuari del sistema o disposar d'un usuari root) i la IP ha de correspondre amb el vostre server.
 
 Un cop executeu aquesta comanda, es mostrarà el fingerprint del server (si no el tenieu ja) i se us demanarà la contrasenya de l'usuari remot amb el que esteu intentant iniciar la sessió remota. Un cop hagueu introduït la contrasenya, i si tot ha funcionat correctament se us advertirà que la clau pública ha estat allotjada al servidor.
 
