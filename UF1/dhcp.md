@@ -188,6 +188,30 @@ En cas d'afegir més regles posteriorment i voler desar-les també com a persist
 # sudo su
 # iptables-save > /etc/iptables/rules.v4
 ~~~
+
+#### Administració remota per ssh a Ubuntu Server
+
+En primer lloc ens hem de crear un parell de claus al nostre equip amfitrió (des d'on iniciarem la connexió remota al server).
+``# ssh-keygen`` deixarem totes les opcions per defecte i ‼️NO INDICAREM CAP CONTRASENYA PER AQUESTES CLAUS‼️ ja que la nostra intenció es automatitzar les connexions amb el servidor.
+
+Podem comprovar que les claus apareixen en el subdirectori ocult ``.ssh`` del nostre home.
+Un cop disposem del nostre parell de claus simplement haurem d'afegir la clau pública al servidor amb la comanda ``# ssh-copy-id alumne@192.168.56.10``. Tingueu en compte que el nom d'usuari serà el que vulgueu utilitzar quan realitzareu les connexions remotes (penseu si us interessa més un usuari del sistema o disposar d'un usuari root) i la IP ha de correspondre amb el vostre server.
+
+Un cop executeu aquesta comanda, es mostrarà el fingerprint del server (si no el tenieu ja) i se us demanarà la contrasenya de l'usuari remot amb el que esteu intentant iniciar la sessió remota. Un cop hagueu introduït la contrasenya, i si tot ha funcionat correctament se us advertirà que la clau pública ha estat allotjada al servidor.
+
+Podeu comprovar com ja podeu accedir al servidor de forma remota sense la necessitat de tornar a introduïr la contrasenya, ja que la vostra clau privada us autentica.
+
+Per últim afegirem aquestes línies al nostre equip amfitrió al fitxer ``~/.ssh/config`` que crearem en cas de no existir:
+~~~
+Host userver
+   HostName 192.168.56.10
+   User alumne
+~~~
+Aquesta informació ha de coincidir amb la IP del servidor i l'usuari amb el que hem afegit les claus al servidor, el nom del host pot ser el que vulgueu (intenteu que sigui descriptiu).
+
+A partir d'ara ja només us cal escriure al terminal ``ssh userver`` i voilà!!! Ja estareu connectats!
+
+<hr>
 ### Instal·lació del servei DHCP a Windows <a name="punt3.2"></a>
 
 Per instal·lar el rol del servidor DHCP des de l'Administrador del Servidor, en l'arbre de característiques buscarem DHCP i el marcarem, afegint les característiques requerides.
