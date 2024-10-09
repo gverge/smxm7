@@ -206,4 +206,3 @@ Abans d'aplicar el descart dels paquets DHCP4_RELEASE, reiniciar o apagar un ord
 ### Més informació:
 
 - [Documentació de Kea](https://kea.readthedocs.io/en/latest/)
-- [GNU/Linux com a router: Reenviament de paquets i NAT]
