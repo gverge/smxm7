@@ -130,31 +130,16 @@ Una configuració d'exemple bàsica per al servidor DHCPv4 pot ser:
 ~~~
 Els apartats de configuració de l'exemple són:
 
-**Dhcp4**: Configuració del servei DHCPv4. A la configuració d'interfícies cal enumerar els adaptadors de xarxa que utilitzarà el servidor.
-
-**reservations-global**: A Kea les reserves poden ser globals o locals a una subxarxa. En aquest cas, no volem reserves globals.
-
-**reservations-out-of-pool**: Quan aquesta opció està activada, el servidor entendrà que per a les reserves s'utilitzen adreces que estan fora dels pooldedicats als clients sense reserva.
-
-**valid-lifetime, renew-timer,rebind-timer**: Temps per a l'adquisició i la renovació de concessions.
-
-**subnet4**: Array dedicat a definir subxarxes. En aquest cas es defineix la subxarxa 192.168.100.0/24.
-
-**match-client-id**: Aquesta opció permet indicar com ha didentificar el servidor als clients. Originalment es feia servir l' adreça MAC del client, però després es va introduir el DUID per identificar els equips independentment de la interfície de xarxa (wifi o cablejada) que utilitzin.
-
-La configuració per defecte utilitza el DUID per identificar els clients. Això fa que el servidor confongui les MVs clonades que tenen el mateix DUID.
-
-Per evitar aquest problema nosaltres utilitzem "match-client-id": falseque configura Kea perquè ignori el DUID del client i només utilitzi la seva adreça MAC.
-
-**option-data**: Opcions passades al client amb la concessió de xarxa. Típicament: porta denllaç, servidors DNS, servidors NTP i domini.
-
-**pools**: Array de blocs d'adreces per assignar als ordinadors que sol·licitin una concessió de xarxa.
-
-**reservations**: Array amb les reserves (ordinadors coneguts als quals se'ls assigna una adreça determinada). A l'exemple només s'utilitzen les opcions "hw-address"(per indicar la MAC de l'ordinador) i "ip-address"per indicar la IP assignada. Però és possible aportar qualsevol opció de configuració en fer la reserva .
-
-**loggers**: Configuració per als fitxers de registre (i journal) de Kea. En aquest cas s'especifica que cal registrar qualsevol missatge marcat com ``DEBUG`` o més important. Els nivells seleccionables , de més pròlix a menys detallat, són: ``DEBUG, INFO, WARN, ERROR i FATAL``.
-
-El nivell de registre DEBUGK no ens inunda amb missatges irrellevants.
+- **Dhcp4**: Configuració del servei DHCPv4. A la configuració d'interfícies cal enumerar els adaptadors de xarxa que utilitzarà el servidor.
+- **reservations-global**: A Kea les reserves poden ser globals o locals a una subxarxa. En aquest cas, no volem reserves globals.
+- **reservations-out-of-pool**: Quan aquesta opció està activada, el servidor entendrà que per a les reserves s'utilitzen adreces que estan fora dels pooldedicats als clients sense reserva.
+- **valid-lifetime, renew-timer,rebind-timer**: Temps per a l'adquisició i la renovació de concessions.
+- **subnet4**: Array dedicat a definir subxarxes. En aquest cas es defineix la subxarxa 192.168.100.0/24.
+- **match-client-id**: Aquesta opció permet indicar com ha didentificar el servidor als clients. Originalment es feia servir l' adreça MAC del client, però després es va introduir el DUID per identificar els equips independentment de la interfície de xarxa (wifi o cablejada) que utilitzin. La configuració per defecte utilitza el DUID per identificar els clients. Això fa que el servidor confongui les MVs clonades que tenen el mateix DUID. Per evitar aquest problema nosaltres utilitzem "match-client-id": falseque configura Kea perquè ignori el DUID del client i només utilitzi la seva adreça MAC.
+- **option-data**: Opcions passades al client amb la concessió de xarxa. Típicament: porta denllaç, servidors DNS, servidors NTP i domini.
+- **pools**: Array de blocs d'adreces per assignar als ordinadors que sol·licitin una concessió de xarxa.
+- **reservations**: Array amb les reserves (ordinadors coneguts als quals se'ls assigna una adreça determinada). A l'exemple només s'utilitzen les opcions "hw-address"(per indicar la MAC de l'ordinador) i "ip-address"per indicar la IP assignada. Però és possible aportar qualsevol opció de configuració en fer la reserva .
+- **loggers**: Configuració per als fitxers de registre (i journal) de Kea. En aquest cas s'especifica que cal registrar qualsevol missatge marcat com ``DEBUG`` o més important. Els nivells seleccionables , de més pròlix a menys detallat, són: ``DEBUG, INFO, WARN, ERROR i FATAL``. El nivell de registre DEBUG no ens inunda amb missatges irrellevants.
 
 Aquí es poden apreciar els missatges registrats en engegar i apagar un client DHCPv4.
 
@@ -164,6 +149,7 @@ gen 06 12:48:19 kea kea-dhcp4[617]: 2023-01-06 12:48:19.228 INFO [kea-dhcp4.leas
 ene 06 12:48:19 kea kea-dhcp4[617]: 2023-01-06 12:48:19.229 INFO [kea-dhcp4.leases/617.140134650707584] DHCP4_LEASE_ALLOC [hwtype=1 08:00:27:d1:b8: 5c], cid=[01:08:00:27:d1:b8:5c], tid=0xa9f404c6: lease 192.168.101.10 has been allocated for 4000 seconds
 gen 06 12:48:45 kea kea-dhcp4[617]: 2023-01-06 12:48:45.078 INFO [kea-dhcp4.leases/617.140134650707584] DHCP4_: 5c], cid=[01:08:00:27:d1:b8:5c], tid=0xa9f404c6: address 192.168.101.10 was released properly.
 ~~~
+
 ## Persistència per a les concessions amb **memfile**
 
 Quan un servidor DHCP assigna una concessió a un equip, heu de desar aquesta informació en algun lloc de manera que persisteixi a possibles reinicis del servidor. Així, quan el servidor arrenca podeu consultar aquesta informació per saber quines concessions segueixen sent vàlides i no evitar assignar aquestes adreces a altres equips.
