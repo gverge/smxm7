@@ -4,7 +4,7 @@
 - [El servei DHCP](#punt1)
 - [El protocol DHCP i els seus components](#punt2)
 - [Instal·lació d'un servei DHCP](#punt3)
-  - [Instal·lació del servei DHCP a Ubuntu Serves](#punt3.1)
+  - [Instal·lació del servei DHCP a Ubuntu Server](#punt3.1)
   - [Instal·lació del servei DHCP a Windows](#punt3.2)
 - [Recursos DHCP](#punt4)
 
@@ -161,7 +161,69 @@ subnet 192.168.56.0 netmask 255.255.255.0 {
         host client2{hardware ethernet 11:22:33:44:55:66}
 }
 ~~~
+#### Declaració de clients coneguts sense adreça fixa
 
+En lloc d'especificar una adreça IP fixa per als clients coneguts, només cal que definim la seva adreça MAC com a known-host, però sense la directiva fixed-address:
+
+~~~
+host client1 {
+    hardware ethernet 00:11:22:33:44:55;
+}
+
+host client2 {
+    hardware ethernet 66:77:88:99:AA:BB;
+}
+~~~
+
+Aquestes definicions simplement marquen els clients com a coneguts, però no els assignen una IP fixa. En lloc d'això, el servidor DHCP els assignarà una IP aleatòria del rang permès.
+
+Ara podem definir un rang d'adreces IP per als clients coneguts. El servidor DHCP assignarà una adreça IP aleatòria dins d'aquest rang per als clients coneguts quan es connectin.
+~~~
+subnet 192.168.1.0 netmask 255.255.255.0 {
+    option routers 192.168.1.1;
+    option subnet-mask 255.255.255.0;
+    option domain-name-servers 192.168.1.1;
+
+    # Rang per als clients coneguts
+    pool {
+        range 192.168.1.10 192.168.1.20;
+        allow known-clients;
+        deny unknown-clients;
+    }
+}
+~~~
+En aquesta configuració, el rang d'adreces IP entre 192.168.1.10 i 192.168.1.20 només està disponible per als clients coneguts.
+Els clients coneguts obtindran una adreça IP aleatòria dins d'aquest rang cada vegada que es connectin al servidor DHCP.
+
+#### Configuració alternativa: Dividir clients coneguts i desconeguts
+
+Si volem gestionar també els clients desconeguts en un altre rang, podem utilitzar una configuració similar a aquesta:
+
+~~~
+subnet 192.168.1.0 netmask 255.255.255.0 {
+    option routers 192.168.1.1;
+    option subnet-mask 255.255.255.0;
+    option domain-name-servers 192.168.1.1;
+
+    # Rang per als clients coneguts
+    pool {
+        range 192.168.1.10 192.168.1.20;
+        allow known-clients;
+        deny unknown-clients;
+    }
+
+    # Rang per als clients desconeguts (opcional)
+    pool {
+        range 192.168.1.100 192.168.1.110;
+        allow unknown-clients;
+    }
+}
+~~~
+
+Amb aquesta configuració els clients coneguts obtindran una adreça IP aleatòria del rang 192.168.1.10 a 192.168.1.20.
+Els clients desconeguts poden obtenir una IP d'un altre rang, com 192.168.1.100 a 192.168.1.110, si ho desitges.
+
+‼️ Després de qualsevol canvi a la configuració no oblideu reiniciar el servei ‼️
 
 
 #### Habilitant l'encaminament a Ubuntu Server
