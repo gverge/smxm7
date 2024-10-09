@@ -69,8 +69,8 @@ Una configuració d'exemple bàsica per al servidor DHCPv4 pot ser:
 ~~~
 {
   "Dhcp4": {
-    "interfícies-config": {
-      "interfícies": [
+    "interfaces-config": {
+      "interfaces": [
         "enp0s8"
       ],
       "dhcp-socket-type": "raw"
@@ -86,7 +86,7 @@ Una configuració d'exemple bàsica per al servidor DHCPv4 pot ser:
         "match-client-id": false,
         "option-data": [
           {
-            "name": "encaminadors",
+            "name": "routers",
             "data": "192.168.100.1"
           },
           {
@@ -99,7 +99,7 @@ Una configuració d'exemple bàsica per al servidor DHCPv4 pot ser:
           },
           {
             "name": "domain-name",
-            "data": "domini-100.test"
+            "data": "dominio-100.test"
           }
         ],
         "pools": [
