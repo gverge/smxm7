@@ -51,7 +51,8 @@ D'altra banda, es tracta d'un disseny modular en què hi ha un dimoni bàsic per
 Opcionalment és possible instal·lar Stork que és una aplicació web per monitoritzar tant Kea com BIND9.
 
 La documentació de Kea és molt completa i es pot consultar als [Docs de KEA](https://kea.readthedocs.io/en/latest/).
-Configuració bàsica de Kea DHCPv4
+
+## Configuració bàsica de Kea DHCPv4
 
 Tal com ens explica l' apartat de la documentació de Kea dedicat a la seva configuració , els fitxers de configuració utilitzen el format JSON . I encara que Kea estén el format JSON per permetre:
 
