@@ -105,7 +105,9 @@ El protocol DNS és usualment **UDP**, però pot ser **TCP i UDP**. Es tracta d�
 - **AUTHORITY**. Aquesta secció conté les respostes que són autoritatives per a la consulta efectuada. Evidentment pot ser buida.
 - **ADITIONAL**. Conté informació addicional per completar la resposta. En l’exemple s’observa que completa la resolució dels noms de màquina que hi ha a la secció asnwer tot indicant la seva adreça IP corresponent.
 
+Podem comprovar aquesta informació realitzant una consulta amb la comanda ``host -a insebre.cat`` 
 
+## Resolució de noms al client
 
 
 
