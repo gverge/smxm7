@@ -79,9 +79,32 @@ El mecanisme de resolució de noms DNS consta d’un client o resolver que reali
 
 Si el servidor disposa de la informació perquè forma part de la base de dades de la seva zona, emetrà una resposta **autoritativa**. Si disposa de la resposta perquè la té emmagatzemada temporalment (en un procés anomenat cache) també emetrà la resposta però aquest cop de manera **no autoritativa**. Si no té informació del domini buscat, el servidor pot fer a altres servidors la mateixa consulta en un procés que pot ser **recursiu o iteratiu**. Sempre existeix un camí per trobar el domini buscat, que és preguntar als nodes arrel (root servers) de l’espai de noms de domini. Partint dels nodes arrel i recorrent l’arbre cap avall, es pot arribar al domini buscat, si és que existeix. 
 
-Quina adreça IP té el domini ns1.ioc.cat?
+*Quina adreça IP té el domini ns1.ioc.cat?*
 
-Si un estudiant australià intenta esbrinar això des del seu servidor de noms de Sindney, probablement acabarà preguntant a un dels nodes arrel per aquest domini. El node arrel desconeix el host ns1 del domini de l’IOC, però sí que coneix tots els dominis de primer nivell (TLD). Proporcionarà una llista amb els servidors de noms del domini .cat. Preguntant a algun d’aquests servidors (del domini .cat) s’obtindrà la llista de servidors DNS del dominiioc.cat. Preguntant als servidors d’aquest domini s’obtindrà l’adreça IP del host ns1 pel qual el domini ioc.cat és autoritari (forma part de la seva zona).
+*Si un estudiant australià intenta esbrinar això des del seu servidor de noms de Sindney, probablement acabarà preguntant a un   dels nodes arrel per aquest domini. El node arrel desconeix el host ns1 del domini de l’IOC, però sí que coneix tots els dominis de primer nivell (TLD). Proporcionarà una llista amb els servidors de noms del domini .cat. Preguntant a algun d’aquests servidors (del domini .cat) s’obtindrà la llista de servidors DNS del dominiioc.cat. Preguntant als servidors d’aquest domini s’obtindrà l’adreça IP del host ns1 pel qual el domini ioc.cat és autoritari (forma part de la seva zona).*
+
+#### Recursió i Iteració
+
+En mode **iteratiu** el servidor retorna la millor resposta possible basada en la seva informació local, sense preguntar a ningú més. En el mode **recursiu** el servidor intenta trobar la resposta preguntant a tants altres servidors com calgui per tal d’obtenir-la. 
+
+El client **resolver** fa una consulta **recursiva** al seu servidor DNS local. Si el servidor DNS disposa de la resposta, la torna . Pot ser de la seva zona i serà una resposta autoritativa o pot tenir-la en cache i serà no autoritativa.
+
+Si no disposa de la resposta, consulta **iterativament** altres servidors apropant-se al domini buscat. Cada servidor que consulta iterativament li pot proporcionar la resposta (autoritativa o no) si la coneix, o una llista de servidors DNS autoritatius per al domini indicat.
+
+La **resolució inversa** permet obtenir el nom de domini a què correspon una adreça IP. Aquest mecanisme, es basa en un domini especial anomenat IN-ADDR.ARPA. Hi ha protocols de xarxa que requereixen una resolució inversa correcta per funcionar bé i sovint s’utilitza com a mesura de seguretat per verificar l’existència de l’adreça IP en un domini. 
+
+### El protocol DNS
+
+El protocol DNS és usualment **UDP**, però pot ser **TCP i UDP**. Es tracta d’un protocol de capa d’aplicació i utilitza el **port 53**.
+
+ Els apartats que componen un missatge DNS són:
+
+- **HEADER**. Capçalera del missatge indicant si és una consulta o una resposta. Conté l’id (identificador) del missatge, flags i un resum de quines seccions del missatge porten informació i quanta.
+- **QUESTION**. Aquesta secció conté la consulta que s’ha efectuat. És a dir, quina dada s’ha demanat al servidor. Pot ser una resolució d’adreça IP a un domini, demanar la llista de servidors d’impressió, etc.
+- **ANSWER**. Secció que conté la resposta obtinguda del servidor. S’entén que aquesta secció conté la resposta no autoritativa. A vegades en les utilitats de consulta aquesta secció es mostra com a non-autority answer.
+- **AUTHORITY**. Aquesta secció conté les respostes que són autoritatives per a la consulta efectuada. Evidentment pot ser buida.
+- **ADITIONAL**. Conté informació addicional per completar la resposta. En l’exemple s’observa que completa la resolució dels noms de màquina que hi ha a la secció asnwer tot indicant la seva adreça IP corresponent.
+
 
 
 
