@@ -279,6 +279,7 @@ Aquesta informació ha de coincidir amb la IP del servidor i l'usuari amb el que
 A partir d'ara ja només us cal escriure al terminal ``ssh userver`` i voilà!!! Ja estareu connectats!
 
 <hr>
+
 ### Instal·lació del servei DHCP a Windows <a name="punt3.2"></a>
 
 Per instal·lar el rol del servidor DHCP des de l'Administrador del Servidor, en l'arbre de característiques buscarem DHCP i el marcarem, afegint les característiques requerides.
