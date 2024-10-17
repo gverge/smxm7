@@ -110,15 +110,19 @@ Podem comprovar aquesta informació realitzant una consulta amb la comanda ``hos
 ## Resolució de noms al client
 Quan volem comunicar-nos amb un host del que coneixem el seu FQDN (per exemple moodle.iesebre.com), el primer que fem fer és obtenir l'adreça IP associada amb el nom de domini. Per això, depenent del contingut del fitxer ``/etc/host.conf`` es consulta el fitxer local ``/etc/hosts`` o bé es consulta als servidors DNS.
 
-Exemple de fitxer ``/etc/hosts``:
-
+Exemple de fitxer/etc/host.conf
 ~~~
-  127.0.0.1 localhost 
-  82.151.203.129 iespuigcastellar.xeill.net 
-  145.97.39.155 ca.wikipedia.org
+ **order hosts,bind** 
+ multi on 
+ ...
 ~~~
 
-El fitxer ``/etc/hosts`` pot contenir una llista d'adreces (una per línia) amb els noms respectius, el que ens permet resoldre en local (tot i que les seves limitacions son clares). 
+El fitxer ``/etc/hosts`` pot contenir una llista d'adreces (una per línia) amb els noms respectius, el que ens permet resoldre en local (tot i que les seves limitacions son clares). Podem assignar nous noms de domini o fins i tot emmascarar-ne altres-
+
+En canvi, quan el client DNS s'utilitza per obtenir l'adreça IP d'un nom de domini cal examinar el fitxer de configuració ``/etc/resolv.conf`` per obtenir:
+
+- La llista de servidors DNS a utilitzar (un per línia precedit per la directiva nameserver)
+- El domini a utilitzar per a les consultes que no són un FQDN indicat per la directiva search
 
 
 
