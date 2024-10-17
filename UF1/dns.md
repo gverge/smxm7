@@ -358,6 +358,6 @@ Abans de configurar el DNS al navegador serà convenient visitar l'adreça https
 
 
 ## Recursos DNS<a name="punt3"></a>
-- [Materials IOC]([url](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a2/continguts.html))
+- [Materials IOC](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a2/continguts.html)
 - [Pàgina oficial ISC BIND9](https://www.isc.org/bind/)
 - [Documentació ISC BIND9](https://kb.isc.org/docs/aa-01031)
