@@ -4,6 +4,7 @@
 - [El Servei DNS](#punt1)
 - [Instal·lació del servidor DNS a Ubuntu Server](#punt2)
 - [Transports DNS](#punt2.1)
+- [Recursos DNS](#punt3)
 
 <hr>
 
