@@ -108,6 +108,17 @@ El protocol DNS és usualment **UDP**, però pot ser **TCP i UDP**. Es tracta d�
 Podem comprovar aquesta informació realitzant una consulta amb la comanda ``host -a insebre.cat`` 
 
 ## Resolució de noms al client
+Quan volem comunicar-nos amb un host del que coneixem el seu FQDN (per exemple moodle.iesebre.com), el primer que fem fer és obtenir l'adreça IP associada amb el nom de domini. Per això, depenent del contingut del fitxer ``/etc/host.conf`` es consulta el fitxer local ``/etc/hosts`` o bé es consulta als servidors DNS.
+
+Exemple de fitxer ``/etc/hosts``:
+
+~~~
+  127.0.0.1 localhost 
+  82.151.203.129 iespuigcastellar.xeill.net 
+  145.97.39.155 ca.wikipedia.org
+~~~
+
+El fitxer ``/etc/hosts`` pot contenir una llista d'adreces (una per línia) amb els noms respectius, el que ens permet resoldre en local (tot i que les seves limitacions son clares). 
 
 
 
