@@ -113,7 +113,7 @@ Quan volem comunicar-nos amb un host del que coneixem el seu FQDN (per exemple m
 
 Exemple de fitxer/etc/host.conf
 ~~~
- **order hosts,bind** 
+ order hosts,bind 
  multi on 
  ...
 ~~~
