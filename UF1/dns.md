@@ -306,7 +306,7 @@ I als servidors esclaus:
         zone "domini.prova" {
              type slave;
              file "domini.prova.hosts";
-             màsters { <IP de Servidor-A>; }; 
+             masters { <IP de Servidor-A>; }; 
              masterfile-format text;
         };
 ~~~
