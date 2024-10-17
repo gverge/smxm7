@@ -313,6 +313,13 @@ I als servidors esclaus:
 La directiva ``masterfile-format text`` és opcional però recomanable ja que utilitzar un fitxer de zona en format text a l'esclau facilita comprovar les dades descarregades.
 Per suposat a l'arxiu de zona convindrà declarar amb registres NS tots els servidors (siguin mestres o esclaus).
 
+‼️ podem comprovar que la resposta és autoritativa amb la mateixa comanda `dig`, fixant-nos en la presència del flag `aa`:
+~~~
+dig smx2.cat @192.168.56.10
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 29459
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+~~~
+
 ### Transports DNS <a name="punt2.1"></a>
 
 El 1983 el protocol DNS va aparèixer utilitzant el protocol de transport UDP i el port 53. Encara avui dia la majoria de les consultes al DNS es fan utilitzant UDP però hi ha altres transports alternatius. El principal d'ells és TCP  que també utilitza el port 53.
@@ -361,3 +368,4 @@ Abans de configurar el DNS al navegador serà convenient visitar l'adreça https
 - [Materials IOC](https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/a2/continguts.html)
 - [Pàgina oficial ISC BIND9](https://www.isc.org/bind/)
 - [Documentació ISC BIND9](https://kb.isc.org/docs/aa-01031)
+
