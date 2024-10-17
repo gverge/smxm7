@@ -2,7 +2,8 @@
 
 ### Índex de Contingut
 - [El Servei DNS](#punt1)
-- [Instal·lació del servidor DNS](#punt2)
+- [Instal·lació del servidor DNS a Ubuntu Server](#punt2)
+- [Transports DNS](#punt2.1)
 
 <hr>
 
@@ -57,7 +58,7 @@ Els servidors de noms DNS són els programes que emmagatzemen i gestionen la inf
 
 Un **domini** es divideix en subdominis per facilitar-ne l’administració, i cada part administrada per un (o més) servidor DNS és una **zona**.
 
-<img width=500 src="https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/media/smxm7uf1ud1_im6.png"/>
+<p align=center><img width=500 src="https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u1/media/smxm7uf1ud1_im6.png"/></p>
 
 Convé tenir clar en tot moment que domini i zona no són equivalents (tot i que poden coincidir).
 
@@ -166,6 +167,193 @@ Un cop instal·lats els seus fitxers de configuració es trobaran al directori *
   - La directiva ``file`` indican el fitxer on s'inlcouran els registres de la zona.
 
 - ``named.conf.default-zones``. Amb zones per defecte com localhost o in-addr.arpa
+
+### Arxiu de dades per a una zona directa
+
+Com hem vist, cada zona necessita un fitxer de dades on desar els registres. Com en l'exemple anterior:
+~~~
+$ORIGIN ies.net.
+$TTL	604800
+@	IN	SOA	ies.net. root.ies.net. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@       IN	NS	ns.ies.net.
+@       IN	A	192.168.10.3
+~~~
+- El caràcter ``@`` equival al domini que s'estigui definint (ies.net.).
+- El camp ``root.ies.net.`` correspon al correu de contacte per indicar errors a la zona.
+- És important incrementar el valor ``Serial`` cada cop que es fa una modificació.
+- En aquesta zona només declarem el servidor de noms.
+
+### Arxiu de dades per a una zona inversa
+També cal definir una zona inversa per al domini:
+~~~
+$TTL 604800
+@ IN SOA 10.168.192.in-addr.arpa. root.ies.net.  (
+                        1
+                        10800
+                        3600
+                        604800
+                        60 )
+
+@ IN NS ns.ies.net.
+3 IN PTR ns.ies.net.
+~~~
+- La ``@`` substitueix a 10.168.192.in-addr.arpa.
+- S'associen les IP amb noms de domini.
+- Les adreces que no acaben en punt com ``3`` s'interpreten com ``3.10.168.192.in-addr.arpa.``.
+
+#### Capçaleres dels arxius de zona
+
+Es tracti d'una zona directa o d'una zona inversa, el fitxer ha de començar amb una capçalera que especifica alguns paràmetres de configuració.
+
+- TTL ( Time To Live ) període de validesa per a la informació continguda a la zona, passat el temps s'ha de refrescar o actualitzar.
+- Registre SOA ( Start Of Authority ), que conté:
+
+<table border="1" class="listing" style="border-collapse: collapse; width: 100%;">
+            <tbody>
+             <tr>
+              <td style="width: 20.4011%;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Camp</font></font></strong></td>
+              <td style="width: 79.599%;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Funció</font></font></strong></td>
+             </tr>
+             <tr>
+              <td style="width: 20.4011%;"><code>serial-number</code></td>
+              <td style="width: 79.599%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">S'ha d'incrementar amb cada modificació del fitxer de zona, així els servidors esclaus poden detectar els canvis als fitxers de zona.</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 20.4011%;"><code>time-to-refresh</code></td>
+              <td style="width: 79.599%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Temps que els servidors esclaus (o secundaris) deixen passar abans de consultar el servidor mestre (o principal) si ha passat algun canvi a la zona.</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 20.4011%;"><code>time-to-retry</code></td>
+              <td style="width: 79.599%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Temps que l'esclau deixa passar abans de tornar a intentar una transferència de zona.</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 20.4011%;"><code>time-to-expire</code></td>
+              <td style="width: 79.599%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Si un servidor esclau no aconsegueix actualitzar les seves zones mitjançant la transferència de zona corresponent, passat aquest temps ha de deixar de considerar vàlida la informació de la zona.</font></font></td>
+             </tr>
+            </tbody>
+           </table>
+
+#### Tipus de registres DNS
+
+Als fitxers de zona s'utilitzen registres per declarar els recursos que coneix el servidor DNS. Aquests registres estan especialitzats de manera que hi ha un tipus de registre DNS diferent per a cada recurs. Alguns dels tipus de registre bàsics són:
+
+<table border="1" class="listing" style="border-collapse: collapse; width: 100%;">
+            <tbody>
+             <tr>
+              <td style="width: 10.4426%;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Registre</font></font></strong></td>
+              <td style="width: 89.5574%;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Funció</font></font></strong></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A</font></font></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IPV4, traducció directa de nom a adreça</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AAAA</font></font></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IPV6, traducció directa de nom a adreça</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PTR</font></font></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Punter, traducció inversa de direcció a nom</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><a class="external-link" href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://es.wikipedia.org/wiki/MX_%2528registro%2529" target="_self" title=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">MX</font></font></a></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mail eXchanger, intercanviador de correu per a un domini</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NS</font></font></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Name Server, identifica els servidors d'una zona, permet delegar subdominis</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><a class="external-link" href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://en.wikipedia.org/wiki/CNAME_record" target="_self" title=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CNAME</font></font></a></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Canonical Name, permet definir noms alternatius</font></font></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><a class="external-link" href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://en.wikipedia.org/wiki/SRV_record" target="_self" title=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SRV</font></font></a></td>
+              <td style="width: 89.5574%;">
+               <dl>
+                <dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                 Service, permet </font></font><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=http://bulma.net/body.phtml?nIdNoticia%3D1334%26nIdPage%3Dlast%23localizaciondeservicios" target="_self"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">declarar serveis</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . D'aquesta manera, un client pot descobrir de manera automàtica els serveis que estan disponibles en un domini.
+                </font></font></dd>
+               </dl></td>
+             </tr>
+             <tr>
+              <td style="width: 10.4426%;"><a class="external-link" href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://en.wikipedia.org/wiki/TXT_Record" target="_self" title=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TXT</font></font></a></td>
+              <td style="width: 89.5574%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Text permet associar un text arbitrari amb un nom de domini.</font></font></td>
+             </tr>
+            </tbody>
+           </table>
+
+### Rèpliques mestre - esclau
+Es convenient muntar diverses màquines amb autoritat per mantenir una zona. En aquest cas l'administrador configurarà manualment el fitxer de zona en una (el servidor mestre) i els servidors esclaus realitzaran una transferència de zona descarregant les dades des del mestre.
+
+Per exemple, al servidor mestre es pot declarar una zona tal que:
+~~~
+	zone "domini.prova" {
+             type master;
+             file "domini.prova.hosts";
+             allow-transfer { <IPs dels servidors esclaus>; };
+        };
+~~~
+I als servidors esclaus:
+~~~
+        zone "domini.prova" {
+             type slave;
+             file "domini.prova.hosts";
+             màsters { <IP de Servidor-A>; }; 
+             masterfile-format text;
+        };
+~~~
+La directiva ``masterfile-format text`` és opcional però recomanable ja que utilitzar un fitxer de zona en format text a l'esclau facilita comprovar les dades descarregades.
+Per suposat a l'arxiu de zona convindrà declarar amb registres NS tots els servidors (siguin mestres o esclaus).
+
+### Transports DNS <a name="punt2.1"></a>
+
+El 1983 el protocol DNS va aparèixer utilitzant el protocol de transport UDP i el port 53. Encara avui dia la majoria de les consultes al DNS es fan utilitzant UDP però hi ha altres transports alternatius. El principal d'ells és TCP  que també utilitza el port 53.
+
+Aquestes dues versions clàssiques de DNS no incorporen cap mesura de seguretat ni xifratge. Per això han aparegut altres alternatives que xifren el protocol DNS per oferir seguretat.
+
+- **DoT**( DNS over TLS ) utilitza el port 853.
+- **DoH**( DNS over HTTPS ) utilitza el port 443.
+
+D'aquestes dues opcions **DoH** està guanyant ràpidament suport entre els navegadors. Per exemple, Firefox avui dia utilitza per defecte **DoH** amb el servidor de Cloudflare 1.1.1.1 encara que és possible configurar un altre servidor.
+
+La comanda **`dig`** ens permetrà fer consultes **DoH** des de l'intèrpret d'ordres:
+
+`# dig +https @1.1.1.1 www.iesebre.com`
+
+#### DNS over HTTPS (DoH) amb BIND
+
+Per activar el suport **DoH** a BIND necessitarem un certificat. Normalment s'utilitzarà un certificat d'una autoritat de certificació reconeguda (com Let's Encrypt ) perquè els clients ho acceptin sense problemes. Però també es podrà utilitzar un certificat autosignat si al navegador (o client utilitzat) s'hi afegeix l'excepció de seguretat corresponent.
+
+Podem crear un certificat autosignat:
+
+`openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/bind/bind-selfsigned.key -out /etc/bind/bind-selfsigned.crt`
+
+Canviem el propietari dels fitxers perquè BIND els pugui llegir:
+
+`chown bind /etc/bind/bind-selfsigned.*`
+
+Editeu el fitxer de configuració `named.conf.options` per afegir el bloc **tls** abans del bloc options.
+~~~
+tls local-tls { 
+   key-file "/etc/bind/bind-selfsigned.key"; 
+   cert-file "/etc/bind/bind-selfsigned.crt"; 
+};
+~~~
+I afegir a l'interior del bloc `options` les línies:
+~~~
+// Volem la IP dels clients que fan consultes
+querylog yes;
+// Configurem l'accés DoH
+listen-on port 443 tls local-tls http default {any;};
+~~~
+Abans de configurar el DNS al navegador serà convenient visitar l'adreça https://<dirección ip>/ per trobar l'advertiment que s'utilitza un certificat autosignat i acceptar-lo. Finalment es podrà configurar al navegador el DoH utilitzant la URL: `https://<dirección ip>/dns-query`
 
 
 
