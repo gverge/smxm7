@@ -1,11 +1,12 @@
 # DNS : Resolució de Noms
 
 ### Índex de Contingut
-- [El Servei DNS]()
+- [El Servei DNS](#punt1)
+- [Instal·lació del servidor DNS](#punt2)
 
 <hr>
 
-## El Servei DNS
+## El Servei DNS <a name="punt1"></a>
 
 El sistema de noms de domini DNS (domain name system) proporciona un mecanisme eficaç per fer la resolució de noms de domini a adreces IP.
 
@@ -28,8 +29,6 @@ En una xarxa petita es pot generar un fitxer amb el nom i identificador IP de to
 El servei DNS es basa en una estructura jeràrquica de noms en forma d’arbre on l’arrel és el node o **domini arrel** del qual deriven tots els altres nodes. Aquest es divideix en **altres dominis**(TLD) com, per exemple, .com, .edu, .org, .cat, etc. Al seu torn, cada domini es pot dividir en **altres subdominis** i així successivament. Les rutes s’indiquen començant pel subdomini més intern cap al node arrel (pc1.informatica.insebre.cat).
 
 Un **domini** és el node indicat i tota la resta de l’arbre que penja d’aquest node.S’entén per espai de noms el conjunt de tots els dominis que formen l’arbre DNS. 
-
-
 
 El sistema de noms de domini d’Internet DNS utilitza els elements següents:
 
@@ -107,7 +106,7 @@ El protocol DNS és usualment **UDP**, però pot ser **TCP i UDP**. Es tracta d�
 
 Podem comprovar aquesta informació realitzant una consulta amb la comanda ``host -a insebre.cat`` 
 
-## Resolució de noms al client
+### Resolució de noms al client
 Quan volem comunicar-nos amb un host del que coneixem el seu FQDN (per exemple moodle.iesebre.com), el primer que fem fer és obtenir l'adreça IP associada amb el nom de domini. Per això, depenent del contingut del fitxer ``/etc/host.conf`` es consulta el fitxer local ``/etc/hosts`` o bé es consulta als servidors DNS.
 
 Exemple de fitxer/etc/host.conf
@@ -123,6 +122,50 @@ En canvi, quan el client DNS s'utilitza per obtenir l'adreça IP d'un nom de dom
 
 - La llista de servidors DNS a utilitzar (un per línia precedit per la directiva nameserver)
 - El domini a utilitzar per a les consultes que no són un FQDN indicat per la directiva search
+
+#### Servei ``systemd-resolved`` i ordre ``resolvectl``
+
+La majoria de les distribucions actuals de GNU/Linux utilitzen systemdaixí que solen executar el servei systemd-resolvedcom a stub DNS local de la màquina. L'avantatge d'utilitzar systemd-resolvedés que les aplicacions trobaran un millor rendiment gràcies a la memòria cau.
+
+Un stub DNS reenvia totes les consultes que no tenen en memòria cau a un servidor DNS recursiu.
+
+La comanda ``resolvectl`` (o ``systemd-resolve``) permet:
+- Mostrar informació sobre la configuració: ``resolvectl status``
+- Mostra estadístiques sobre els encerts de memòria cau: ``resolvectl statistics``
+- Mostra els DNS utilitzats: ``resolvectl dns``
+- Fer resolucions DNS: ``resolvectl query ca.wikipedia.org`` o ``systemd-resolve ca.wikipedia.org``
+- Esborrar la cau DNS: ``resolvectl flush-caches`` o ``systemd-resolve --flush-caches``
+
+Altres ordres per a realitzar consultes son ``host``. ``nslookup`` o ``dig``.
+
+## Instal·lació del servidor DNS <a name="punt2"></a>
+
+**``BIND``** és el programari més utilitzat com a servidor DNS a Internet, com així ho demostra que ho estiguin executant la majoria dels servidors arrel .
+
+Aquest servei es pot instal·lar mitjançant:
+~~~
+apt install bind9
+~~~
+Un cop instal·lats els seus fitxers de configuració es trobaran al directori **``/etc/bind``**. Entre aquests fitxers destaca el fitxer de configuració principal ``named.conf`` que únicament serveix per incloure: 
+
+- ``named.conf.options``, on configurem les opcions del servidor, com els servidors de reenviament o la configuació d'escolta (listen).
+- ``named.conf.local``, on podem declarar les nostres zones.
+--
+  ~~~
+  zone "ies.net" IN {
+	 type master;
+	 file "/etc/bind/db.ies.net";
+	 };
+  zone "10.168.192.in-addr.arpa" IN {
+	 type master;
+	 file "/etc/bind/db.192.168.10";
+	 }; 
+  ~~~
+  - La la directiva ``zone`` indica el domini o l'adreça de xarxa a les zones inverses.
+  - La directiva ``type`` indica si és una zona mestra (escrita per l'administrador) o una esclava (descarregada automàticament d'un servidor mestre).
+  - La directiva ``file`` indican el fitxer on s'inlcouran els registres de la zona.
+
+- ``named.conf.default-zones``. Amb zones per defecte com localhost o in-addr.arpa
 
 
 
