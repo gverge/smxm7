@@ -175,7 +175,7 @@ Com hem vist, cada zona necessita un fitxer de dades on desar els registres. Com
 ~~~
 $ORIGIN ies.net.
 $TTL	604800
-@	IN	SOA	ies.net. root.ies.net. (
+@	IN	SOA	ns.ies.net. root.ies.net. (
 			      1		; Serial
 			 604800		; Refresh
 			  86400		; Retry
@@ -194,7 +194,7 @@ $TTL	604800
 També cal definir una zona inversa per al domini:
 ~~~
 $TTL 604800
-@ IN SOA 10.168.192.in-addr.arpa. root.ies.net.  (
+@ IN SOA ns.ies.net. root.ies.net.  (
                         1
                         10800
                         3600
