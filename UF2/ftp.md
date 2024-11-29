@@ -64,3 +64,9 @@ En el **mode passiu**, és l’ordinador **client qui inicia** la connexió adre
 - El servidor confirma la connexió del canal de dades.
 - Els canals d'ordres i dades estan oberts i llestos per a la seva activitat.
 
+## Regles IPtables
+sudo iptables -t nat -A PREROUTING -p tcp --dport 21 -i enp0s8 -j DNAT --to 172.16.1.2
+sudo iptables -t nat -A PREROUTING -m conntrack --ctstate NEW -p tcp --match multiport --dport 10000:10100 -i enp0s8 -j DNAT --to 172.16.1.2 (adreça del vostre server)
+
+sudo su
+iptables-save > /etc/iptables/rules.v4
