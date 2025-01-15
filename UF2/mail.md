@@ -48,4 +48,5 @@ Amb la intenció d’aprofundir en la gestió del correu electrònic haurem de c
 ## Recursos Correu Electrònic<a name="punt3"></a>
 
 - [Enviar correus des de Terminal](https://www.digitalocean.com/community/tutorials/send-email-linux-command-line)
+- [hMail - Servidor de correu per Windows](https://www.redeszone.net/tutoriales/servidores/configurar-servidor-correo-windows/)
 
