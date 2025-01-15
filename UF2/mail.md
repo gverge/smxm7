@@ -4,6 +4,7 @@
 - [Recursos Correu Electrònic](#punt4)
 
 <hr>
+
 ## El serveis de Correu Electrònic <a name="punt1"></a>
 
 L’enviament i la recepció de correus electrònics comporta la intervenció de més d’un protocol d’aplicació i, en conseqüència, de més d’un tipus de servidor. Aquesta separació en funció de diferents protocols es basa en el fet que la comunicació via correu electrònic entre dos usuaris no és un procés client-servidor síncron. És a dir, quan un usuari envia un correu electrònic no té la certesa que el destinatari estigui connectat i, en conseqüència, el missatge haurà de ser emmagatzemat per poder ser llegit més endavant.
