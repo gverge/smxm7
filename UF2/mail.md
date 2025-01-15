@@ -18,6 +18,8 @@ Dins d’aquesta comunicació asíncrona intervenen algunes funcionalitats ben d
 <p align=center><img src="https://ioc.xtec.cat/materials/FP/Recursos/fp_smx_m07_/web/fp_smx_m07_htmlindex/WebContent/u2/media/smxm7uf1ud2_im46.png" width=400></p>
 
 
+
+
 ## Protocols i serveis de descàrrega de correu <a name="punt2"></a>
 
 Considerant que el correu electrònic es basa en l’arquitectura client-servidor on el servidor ofereix un recurs de qualsevol tipus a l’altre (el client) perquè aquest pugui obtenir un profit o avantatge, podem afirmar que és en l’equip servidor on s’allotjaran els diferents comptes d’usuari i mitjançant els clients de correu es gestionarà la descàrrega dels missatges.
@@ -39,6 +41,8 @@ Amb la intenció d’aprofundir en la gestió del correu electrònic haurem de c
    Normalment, el protocol d’accés a missatges d’Internet (IMAP, Internet Message Access Protocol) és utilitzat pels servidors i pels clients de correu electrònic via web. Aquests tipus de servidors i clients faciliten als usuaris la gestió de les seves bústies de correu electrònic des de qualsevol ordinador amb accés a Internet.
 
    Val a dir que el protocol d’accés a missatges d’Internet (IMAP, Internet Message Access Protocol) es diferencia del protocol d’oficina de correus (POP, Post Office Protocol) en el fet que els correus electrònics estan emmagatzemats en el servidor i es queden allí fins i tot si es descarreguen el cas més típic són els servidors de correu electrònic via web. Per contra, en el protocol d’oficina de correus (POP, Post Office Protocol) comporta que els correus electrònics es descarreguin en l’ordinador del client directament i no quedin emmagatzemats en el servidor.
+
+
 
 
 ## Recursos Correu Electrònic<a name="punt3"></a>
