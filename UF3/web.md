@@ -129,7 +129,7 @@ Molts mòduls tenen el seu propi fitxer de configuració on s'especifiquen els p
              </tr>
              <tr style="height: 21px;">
               <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/event.html">mpm_event</a></code></td>
-              <td style="width: 76.9498%; height: 21px;"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">És el mòdul de multiprocessament d'alt rendiment utilitzat a GNU/Linux. Les connexions dels clients són ateses per processos fills que contenen un pool de fils.</font></font></p><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">És una evolució que </font></font><code>mpm_worker</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">al seu torn va ser una evolució del clàssic </font></font><code>mpm_prefork</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p></td>
+              <td style="width: 76.9498%; height: 21px;"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">És el mòdul de multiprocessament d'alt rendiment utilitzat a GNU/Linux. Les connexions dels clients són ateses per processos fills que contenen un pool de fils.</font></font></p><</td>
              </tr>
              <tr style="height: 21px;">
               <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_status.html">mod_status</a></code></td>
