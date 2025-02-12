@@ -27,6 +27,11 @@ Cada cop que un client fa una petició a un servidor, s’executa un ventall d�
 <li>Es tanca la connexió TCP.</li>
 </ol>
 
+### L’estàndard HTTP/1.0
 
+L’estàndard HTTP/1.0 recull, únicament, tres ordres que representen les operacions de recepció, enviament de la informació i revisió de l’estat.
+- **Comanda GET**. S’utilitza per recollir qualsevol tipus d’informació del servidor. Sempre que premem sobre un enllaç o escrivim una adreça d’Internet a la barra de navegació d’un navegador web, estem utilitzant aquesta comanda. Com a resultat, el servidor HTTP envia el document corresponent a l’adreça d’Internet seleccionada o bé activa un mòdul CGI que, al seu torn, generarà la informació de tornada.
+- **Comanda HEAD**. Sol·licita informació sobre un objecte (arxiu) com, per exemple, la seva grandària, el tipus, la data de modificació, etc. Acostuma a ser utilitzat pels gestors de memòries cau de pàgines o pels servidors intermediaris (proxy server) per conèixer quan cal actualitzar la còpia que es manté d’un arxiu determinat.
+- **Comanda POST**. S’utilitza per enviar informació al servidor com, per exemple, les dades contingudes en un formulari. El servidor passarà aquesta informació a un procés encarregat del seu tractament (acostuma a ser una aplicació CGI). L’operació que es durà a terme amb la informació proporcionada dependrà de l’adreça d’Internet (URL) utilitzada, principalment, en els formularis.
 
 
