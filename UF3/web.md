@@ -101,7 +101,7 @@ Les funcions d'Apache HTTP Server estan implementades en diferents mòduls que e
 La instal·lació bàsica del paquet apache2 ja ha instal·lat diversos mòduls al directori **``/etc/apache2/mods-available``** i n'ha activat alguns amb enllaços simbòlics al directori **``/etc/apache2/mods-enabled``**.
 
 Molts mòduls tenen el seu propi fitxer de configuració on s'especifiquen els paràmetres generals de funcionament. D'aquests mòduls en podem destacar:
-<table border="1" class="vertical listing" style="border-collapse: collapse; width: 100%; height: 169px;">
+<table border="1" class="vertical listing" style="border-collapse: collapse; width: 95%; height: 169px;">
             <tbody>
              <tr style="height: 21px;">
               <td style="width: 23.0502%; height: 21px;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mòdul</font></font></strong></td>
