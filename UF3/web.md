@@ -74,3 +74,23 @@ La configuració del servidor depèn de la distribució de GNU/Linux que s'utili
 
 ### Eines per a la gestió de la configuració: **``a2enconf``**, **``a2enmod``**, **``a2ensite``**
 
+La configuració de l'Apache HTTP Server desa els fragments per a la configuració general, els mòduls i els llocs (VirtualHosts) en directoris diferenciats. Per a cadascun d'aquests elements s'utilitzen dos directoris, un guarda tots els elements disponibles i l'altre conté enllaços simbòlics per a aquells elements actius.
+
+Durant l'arrencada Apache HTTP Server llegirà tots els fragments que estiguin a l'interior dels directoris *-enabled/i els tindrà en compte durant la configuració.
+
+Encara que és possible gestionar aquests enllaços de manera manual, hi ha unes eines específiques que creen o eliminen aquests enllaços (activant o desactivant la configuració, el mòdul o el lloc que correspongui).
+
+Aquestes eines són:
+
+- **``a2enconf—a2disconf``**: Habilita, o desactiva, el fragment de configuració indicat.
+- **``a2enmod—a2dismod``**: Habilita, o deshabilita, el mòdul indicat.
+- **``a2ensite—a2dissite``**: Habilita, o deshabilita, el lloc indicat.
+
+Per exemple, per habilitar el VirtualHost default-ssl.confque publica continguts amb HTTPS només cal fer:
+
+1 Activar el mòdul SSL que necessita HTTPS:a2enmod ssl
+2 Activar el lloc:a2ensite default-ssl
+3 Demaneu a Apache HTTP Server que torneu a carregar la configuració:systemctl reload apache2
+
+Després es podrà accedir mitjançant HTTPS al servidor.
+
