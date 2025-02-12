@@ -140,5 +140,58 @@ Molts mòduls tenen el seu propi fitxer de configuració on s'especifiquen els p
             </tbody>
            </table>
            
+### Autenticació d'accés bàsic amb HTTP
 
+Apache HTTP Server pot protegir amb autenticació daccés bàsic HTTP alguns recursos. Així és possible, per exemple, demanar usuari i contrasenya per accedir al contingut de cert directori i permetre l'accés únicament en el cas d'algun usuari concret o d'un grup.
 
+**L'autenticació bàsica d'HTTP transmet l'usuari i la contrasenya com a text clar així que a la pràctica sempre s'ha de combinar amb HTTPS.**
+
+Per posar en marxa l'autenticació bàsica convé crear un fitxer de contrasenyes on es registraran els usuaris i contrasenyes. Aquest fitxer es gestiona amb l'ordre **``htpasswd``** i hauria d'estar fora de qualsevol **DocumentRoot** per evitar que el servidor el publiqui a la web.
+
+Per exemple, per crear el fitxer de contrasenyes **`/var/www/passwords``** i desar-hi l'usuari:
+~~~
+root@apache:/var/www# htpasswd -c passwords usuari1
+New password: 
+Re-type new password: 
+Adding password per a usuari1 
+~~~
+
+Un cop creat el fitxer es podran afegir més usuaris en tornar a executar **``htpasswd``** sense utilitzar l'argument **``-c``** que només serveix per crear un fitxer nou (o esborrar els continguts d'un fitxer existent).
+
+Després podreu utilitzar una directiva **``<Directory>``** per canviar la configuració d'accés als continguts d'un directori. Per exemple, per protegir amb autenticació bàsica el directori **``/var/www/html/secret``**, es pot afegir la configuració següent per al **VirtualHost** d'un lloc web i recarregar la configuració.
+~~~
+...
+< Directory "/var/www/html/secret" >
+            AuthType Basic
+            AuthName "Fitxers restringits"
+            AuthBasicProvider file
+            AuthUserFile "/var/www/passwords"
+            Require usuari1 usuari2
+</ Directory > 
+~~~
+
+La directiva Require també ens permetrà entre altres funcions:
+- Utilitzar **``Require valid-user``** per acceptar qualsevol usuari del fitxer de contrasenyes.
+- Especificar una llista d'usuaris vàlids: **``Require user usuari1 usuari2 usuari3``**
+- Filtrar per una adreça (IP, fragment d'IP o llista d'IPs): **``Require ip 192.168.0.50``**
+
+També és possible utilitzar un fitxer on es poden declarar grups d'usuaris a conveniència (groups).
+
+### Diversos llocs amb la directiva **``VirtualHost``**
+
+Un servidor Apache HTTP pot publicar diferents llocs web, cadascun amb el seu propi DocumentRoot i configuració. A l'interior d'un **VirtualHost** s'hereten els valors de configuració global, però és possible redefinir de manera particular aquells que hagin de canviar.
+
+Els **VirtualHost** poden ser:
+- Basats en IP: atenen en una adreça IP diferent per a cada VirtualHost
+- Basat en nom: són més flexibles perquè no cal afegir més adreces al servidor web, Apache HTTP Server utilitzarà el **VirtualHost** adequat basant-se en el nom que va utilitzar el navegador per arribar fins al servidor. Funcionen a Internet gràcies al DNS però en un entorn de desenvolupament es poden utilitzar "substituint" el DNS per entrades del fitxer /etc/hosts tant al servidor com al client.
+
+Normalment VirtualHostes defineixen en un fitxer propi del directori sites-available/i s'activen amb l'ordre a2ensitequan és necessari.
+
+La definició d'un **VirtualHost** basat en nom senzill pot ser:
+~~~
+<VirtualHost *:80> 
+    ServerName test.smx2.cat
+    DocumentRoot /var/www/html/testsmx
+</VirtualHost>
+~~~
+La directiva **``ServerName``** s'utilitza per indicar el domini per al qual respondrà aquest lloc, i **``*:80``** indica el port on escoltarà (de qualsevol interfície).
