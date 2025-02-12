@@ -94,3 +94,51 @@ Per exemple, per habilitar el VirtualHost default-ssl.confque publica continguts
 
 Després es podrà accedir mitjançant HTTPS al servidor.
 
+### Mòduls d'Apache HTTP Server
+
+Les funcions d'Apache HTTP Server estan implementades en diferents mòduls que es poden habilitar o deshabilitar segons convingui. En general no convé tenir actius mòduls que no siguin necessaris ja que augmentarà el consum de recursos i estarem exposant funcions potser sense configurar degudament.
+
+La instal·lació bàsica del paquet apache2 ja ha instal·lat diversos mòduls al directori **``/etc/apache2/mods-available``** i n'ha activat alguns amb enllaços simbòlics al directori **``/etc/apache2/mods-enabled``**.
+
+Molts mòduls tenen el seu propi fitxer de configuració on s'especifiquen els paràmetres generals de funcionament. D'aquests mòduls en podem destacar:
+
+
+            <tbody>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mòdul</font></font></strong></td>
+              <td style="width: 76.9498%; height: 21px;"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Funció</font></font></strong></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_alias.html">mod_alias</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mapeja peticions a fitxers o directoris en disc. Utilitzant aquest mòdul es pot, per exemple, fer que les peticions web que continguin </font></font><code>/ficheros</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">no vagin al directori </font></font><code>ficheros</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">dins del </font></font><code>DocumentRoot</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">sinó a un altre directori.</font></font></p><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Exemple:</font></font><code>Alias "/ficheros" "/mnt/ficheros"</code></p><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">També permet </font></font><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_alias.html%23redirect" title="Apache: Directiva redirect"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">redireccions HTTP</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Exemple:</font></font><code>Redirect "/service" "https://172.16.0.26/"</code></p></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_auth_basic.html">mod_auth_basic</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proporciona </font></font><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://es.wikipedia.org/wiki/Autenticaci%25C3%25B3n_de_acceso_b%25C3%25A1sica" title="Wikipedia: Autenticació d'accés bàsica."><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">autenticació d'accés bàsica</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . Permet sol·licitar usuari i contrasenya per accedir a alguns recursos ia la pràctica s'ha de combinar amb </font></font><code>HTTPS</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_autoindex.html">mod_autoindex</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Genera llistats de fitxers per a aquells directoris que no tenen una pàgina </font></font><code>index.html</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Aquest mòdul és molt convenient per publicar tot un arbre de fitxers per on podeu navegar l'usuari.</font></font></p></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_deflate.html">mod_deflate</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implementa un filtre per a la sortida de l'Apache HTTP Server que comprimeix la informació abans de transmetre-la.</font></font></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_dir.html">mod_dir</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Permet configurar quines pàgines es consideraran un índex per al directori.</font></font></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/event.html">mpm_event</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">És el mòdul de multiprocessament d'alt rendiment utilitzat a GNU/Linux. Les connexions dels clients són ateses per processos fills que contenen un pool de fils.</font></font></p><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">És una evolució que </font></font><code>mpm_worker</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">al seu torn va ser una evolució del clàssic </font></font><code>mpm_prefork</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p></td>
+             </tr>
+             <tr style="height: 21px;">
+              <td style="width: 23.0502%; height: 21px;"><code><a href="https://translate.google.com/website?sl=es&amp;tl=ca&amp;hl=ca&amp;client=webapp&amp;u=https://httpd.apache.org/docs/2.4/mod/mod_status.html">mod_status</a></code></td>
+              <td style="width: 76.9498%; height: 21px;"><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Si s'activa amb:</font></font></p><pre class="prettyprint lang-config prettyprinted"><span class="pun"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&lt; </font></font></span><span class="tag"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Location </font></font></span><font style="vertical-align: inherit;"><span class="str"><font style="vertical-align: inherit;">"/server-status" </font></span><span class="pun"><font style="vertical-align: inherit;">&gt; </font></span><span class="kwd"><font style="vertical-align: inherit;">SetHandler </font></span><span class="pln"><font style="vertical-align: inherit;">server-status </font></span><span class="pln"><font style="vertical-align: inherit;">    Requereix ip 192.168.0.0/16 </font></span><span class="pun"><font style="vertical-align: inherit;">&lt;/ </font></span><span class="tag"><font style="vertical-align: inherit;">Location </font></span><span class="pun"><font style="vertical-align: inherit;">&gt;</font></span></font><span class="pln"> </span><span class="str"><font style="vertical-align: inherit;"></font></span><span class="pun"><font style="vertical-align: inherit;"></font></span><span class="pln">
+    </span><span class="kwd"><font style="vertical-align: inherit;"></font></span><span class="pln"><font style="vertical-align: inherit;"></font><br><font style="vertical-align: inherit;"></font></span><span class="pln">
+</span><span class="pun"><font style="vertical-align: inherit;"></font></span><span class="tag"><font style="vertical-align: inherit;"></font></span><span class="pun"><font style="vertical-align: inherit;"></font></span></pre><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Permet obtenir informació sobre el funcionament d'Apache en visitar </font></font><code>/server-status</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">des de la xarxa </font></font><code>192.168.0.0/16</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p></td>
+             </tr>
+            </tbody>
+           
+
+
