@@ -34,7 +34,7 @@ L’estàndard HTTP/1.0 recull, únicament, tres ordres que representen les oper
 - **Comanda HEAD**. Sol·licita informació sobre un objecte (arxiu) com, per exemple, la seva grandària, el tipus, la data de modificació, etc. Acostuma a ser utilitzat pels gestors de memòries cau de pàgines o pels servidors intermediaris (proxy server) per conèixer quan cal actualitzar la còpia que es manté d’un arxiu determinat.
 - **Comanda POST**. S’utilitza per enviar informació al servidor com, per exemple, les dades contingudes en un formulari. El servidor passarà aquesta informació a un procés encarregat del seu tractament (acostuma a ser una aplicació CGI). L’operació que es durà a terme amb la informació proporcionada dependrà de l’adreça d’Internet (URL) utilitzada, principalment, en els formularis.
 
-## El servidor Apache <a name="punt1"></a>
+## El servidor Apache <a name="punt2"></a>
 
 L’Apache és un servidor web flexible, ràpid i eficient, contínuament actualitzat i adaptat als nous protocols HTTP/1.1. De la gran quantitat de característiques destaquen:
 
@@ -51,12 +51,26 @@ Per exemple a Ubuntu es pot instal·lar així:
 apt update 
 apt install apache2
 ~~~
-La instal·lació activa el servei i l'encén amb la configuració per defecte que escolteu al port 80de totes les interfacesde xarxa.
+La instal·lació activa el servei i l'encén amb la configuració per defecte que escolteu al port 80 de totes les interfacesde xarxa.
 
-El servidor publicarà a la web el contingut del directori DocumentRootque per defecte és /var/www/htmli únicament conté una pàgina per comprovar que tot funciona bé.
+El servidor publicarà a la web el contingut del directori DocumentRootque per defecte és **``/var/www/html``** i únicament conté una pàgina per comprovar que tot funciona bé.
 
-Al directori /var/log/apache2es troben els següents fitxers de registre:
-- access.log: Fitxer de registre d'accessos. Contindrà una línia per cada accés al servidor web per al VirtualHost per defecte.
-- other_vhosts_access.log: Fitxer de registre d'accessos per a altres VirtualHosts. És possible indicar el fitxer de registre a utilitzar a la definició del VirtualHost.
-- error.log: Fitxer de registre derrors. Aquí Apache HTTP Server mostrarà informació sobre els problemes que trobeu.
+Al directori **``/var/log/apache2``** es troben els següents fitxers de registre:
+- **``access.log``** : Fitxer de registre d'accessos. Contindrà una línia per cada accés al servidor web per al VirtualHost per defecte.
+- **``other_vhosts_access.log``**: Fitxer de registre d'accessos per a altres VirtualHosts. És possible indicar el fitxer de registre a utilitzar a la definició del VirtualHost.
+- **``error.log``**: Fitxer de registre derrors. Aquí Apache HTTP Server mostrarà informació sobre els problemes que trobeu.
+
+### Configuració d'Apache HTTP Server
+
+La configuració del servidor depèn de la distribució de GNU/Linux que s'utilitzi. A Debian —i derivats com Ubuntu— està dividida en diferents fitxers a l'interior de **``/etc/apache2``**. Evidentment el fitxer principal de configuració és **``apache2.conf``**. Aquest fitxer conté valors globals de configuració per a tot el servidor amb uns valors per defecte molt raonables, a més inclou altres fitxers de configuració com són:
+
+- **``ports.conf``**: Aquí s'indiquen els ports on escoltarà el servidor. Per defecte 80 TCPper HTTPi 443 TCPper HTTPS.
+- Directori **``conf-available``**: Conté fragments per a la configuració global del servidor.
+- Directori **``conf-enabled``**: Enllaços als fragments del directori actual que estan actius.
+- Directori **``mods-available``**: Conté els mòduls —i la configuració— que estan instal·lats.
+- Directori **``mods-enabled``**: Enllaços als mòduls del directori anterior que estan actius.
+- Directori **``sites-available``**: Declaració de VirtualHosts.
+- Directori **``sites-enabled``**: Enllaços als llocs actius.
+
+### Eines per a la gestió de la configuració: **``a2enconf``**, **``a2enmod``**, **``a2ensite``**
 
