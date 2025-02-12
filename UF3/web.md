@@ -88,9 +88,9 @@ Aquestes eines són:
 
 Per exemple, per habilitar el VirtualHost default-ssl.confque publica continguts amb HTTPS només cal fer:
 
-1 Activar el mòdul SSL que necessita HTTPS:a2enmod ssl
-2 Activar el lloc:a2ensite default-ssl
-3 Demaneu a Apache HTTP Server que torneu a carregar la configuració:systemctl reload apache2
+1. Activar el mòdul SSL que necessita HTTPS:a2enmod ssl
+2. Activar el lloc:a2ensite default-ssl
+3. Demaneu a Apache HTTP Server que torneu a carregar la configuració:systemctl reload apache2
 
 Després es podrà accedir mitjançant HTTPS al servidor.
 
