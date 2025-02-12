@@ -1,7 +1,7 @@
 # Gestió de servidors WEB
 ### Índex de Contingut
 - [El protocol HTTP](#punt1)
-- [Mode Actiu i Passiu](#punt2)
+- [El servidor Apache](#punt2)
 
 <hr>
 
@@ -34,4 +34,29 @@ L’estàndard HTTP/1.0 recull, únicament, tres ordres que representen les oper
 - **Comanda HEAD**. Sol·licita informació sobre un objecte (arxiu) com, per exemple, la seva grandària, el tipus, la data de modificació, etc. Acostuma a ser utilitzat pels gestors de memòries cau de pàgines o pels servidors intermediaris (proxy server) per conèixer quan cal actualitzar la còpia que es manté d’un arxiu determinat.
 - **Comanda POST**. S’utilitza per enviar informació al servidor com, per exemple, les dades contingudes en un formulari. El servidor passarà aquesta informació a un procés encarregat del seu tractament (acostuma a ser una aplicació CGI). L’operació que es durà a terme amb la informació proporcionada dependrà de l’adreça d’Internet (URL) utilitzada, principalment, en els formularis.
 
+## El servidor Apache <a name="punt1"></a>
+
+L’Apache és un servidor web flexible, ràpid i eficient, contínuament actualitzat i adaptat als nous protocols HTTP/1.1. De la gran quantitat de característiques destaquen:
+
+- És multiplataforma.
+- Segueix els protocols estàndard internacionals.
+- És modular, és a dir, es pot adaptar a diferents entorns i necessitats que poden activar només aquelles parts que són necessàries. També disposa d’una interfície de programació d’aplicacions (API, application programming interface) de mòduls que permet que els usuaris puguin programar els seus propis mòduls específics.
+- Es desenvolupa de manera oberta i es retroalimenta d’idees noves, registres (logs) d’errades i pegats per a la resolució dels problemes que vagin sorgint.
+- És extensible, ja que gràcies a la seva característica modular s’han desenvolupat diverses extensions com, per exemple, les de programació (PHP, Python, Java, Perl, etc.), que es corresponen amb un llenguatge de programació que treballa simultàniament amb el servidor i que permeten connectar amb múltiples bases de dades (Oracle, MySQL, PostgreSQL, Adabas, etc.).
+
+El servidor web Apache es troba als repositoris de qualsevol distribució que es preï i normalment aquesta és la manera recomanada per a la seva instal·lació.
+
+Per exemple a Ubuntu es pot instal·lar així:
+~~~
+apt update 
+apt install apache2
+~~~
+La instal·lació activa el servei i l'encén amb la configuració per defecte que escolteu al port 80de totes les interfacesde xarxa.
+
+El servidor publicarà a la web el contingut del directori DocumentRootque per defecte és /var/www/htmli únicament conté una pàgina per comprovar que tot funciona bé.
+
+Al directori /var/log/apache2es troben els següents fitxers de registre:
+- access.log: Fitxer de registre d'accessos. Contindrà una línia per cada accés al servidor web per al VirtualHost per defecte.
+- other_vhosts_access.log: Fitxer de registre d'accessos per a altres VirtualHosts. És possible indicar el fitxer de registre a utilitzar a la definició del VirtualHost.
+- error.log: Fitxer de registre derrors. Aquí Apache HTTP Server mostrarà informació sobre els problemes que trobeu.
 
