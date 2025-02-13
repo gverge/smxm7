@@ -2,6 +2,9 @@
 ### Índex de Contingut
 - [El protocol HTTP](#punt1)
 - [El servidor Apache](#punt2)
+  -[Autenticació d'accés bàsic amb HTTP](#punt2.1)
+  -[Diversos llocs amb la directiva VirtualHost](#punt2.2)
+  -[Web segura amb HTTPS](#punt2.3)
 
 <hr>
 
@@ -140,7 +143,7 @@ Molts mòduls tenen el seu propi fitxer de configuració on s'especifiquen els p
             </tbody>
            </table>
            
-### Autenticació d'accés bàsic amb HTTP
+### Autenticació d'accés bàsic amb HTTP <a name="punt2.1"></a>
 
 Apache HTTP Server pot protegir amb autenticació daccés bàsic HTTP alguns recursos. Així és possible, per exemple, demanar usuari i contrasenya per accedir al contingut de cert directori i permetre l'accés únicament en el cas d'algun usuari concret o d'un grup.
 
@@ -177,7 +180,7 @@ La directiva Require també ens permetrà entre altres funcions:
 
 També és possible utilitzar un fitxer on es poden declarar grups d'usuaris a conveniència (groups).
 
-### Diversos llocs amb la directiva **``VirtualHost``**
+### Diversos llocs amb la directiva **``VirtualHost``** <a name="punt2.2"></a>
 
 Un servidor Apache HTTP pot publicar diferents llocs web, cadascun amb el seu propi DocumentRoot i configuració. A l'interior d'un **VirtualHost** s'hereten els valors de configuració global, però és possible redefinir de manera particular aquells que hagin de canviar.
 
@@ -197,7 +200,7 @@ La definició d'un **VirtualHost** basat en nom senzill pot ser:
 La directiva **``ServerName``** s'utilitza per indicar el domini per al qual respondrà aquest lloc, i **``*:80``** indica el port on escoltarà (de qualsevol interfície).
 
 
-### Web segura amb HTTPS
+### Web segura amb HTTPS <a name="punt2.3"></a>
 
 Actualment qualsevol servei web ha de permetre connexions amb la seguretat que proporciona el protocol **HTTPS**. Aquest protocol empra **TLS** per xifrar la informació que es transmet per la xarxa utilitzant **criptografia asimètrica**. Al servidor s'ha d'instal·lar el certificat web que podrà ser autogenerat o generat per una autoritat de certificació reconeguda per evitar alertes als clients.
 
