@@ -195,3 +195,56 @@ La definició d'un **VirtualHost** basat en nom senzill pot ser:
 </VirtualHost>
 ~~~
 La directiva **``ServerName``** s'utilitza per indicar el domini per al qual respondrà aquest lloc, i **``*:80``** indica el port on escoltarà (de qualsevol interfície).
+
+
+### Web segura amb HTTPS
+
+Actualment qualsevol servei web ha de permetre connexions amb la seguretat que proporciona el protocol **HTTPS**. Aquest protocol empra **TLS** per xifrar la informació que es transmet per la xarxa utilitzant **criptografia asimètrica**. Al servidor s'ha d'instal·lar el certificat web que podrà ser autogenerat o generat per una autoritat de certificació reconeguda per evitar alertes als clients.
+
+Durant la instal·lació d'**Apache HTTP Server** s'ha generat un certificat autosignat per provar HTTPS. Es pot veure el seu ús a **``sites-available/default-ssl.conf``**.
+
+Aquí es mostra el contingut del fitxer sense comentaris:
+~~~
+<IfModule mod_ssl.c>
+ 	<VirtualHost _default_:443 >
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/html
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+		SSLEngine on
+		SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem 
+		SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+		<FilesMatch "\.(cgi|shtml|phtml|php)$">
+	            	SSLOptions +StdEnvVars
+                        </FilesMatch> 
+                        <Directory /usr/lib/cgi-bin> 
+			SSLOptions +StdEnvVars 
+		</Directory> 
+	</VirtualHost> 
+</IfModule>
+~~~
+Les directives més rellevants són:
+
+- **``<IfModule mod_ssl.c>``**: Es la condició per tal que la resta de configuració sigue vigent, cal que el mòdul ``mod_ssl`` estigui actiu.
+- **``<VirtualHost _default_:443 >``**: El servidor esperarà les connexions dels clients al port 443.
+- **``SSLEngine on``**: Activa el suport SSL/TLS.
+- **``SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem``**: Certificat autogenerat pel paquet ssl-cert.
+- **``SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key``**: Clau privada del certificat anterior generada pel paquet  ssl-cert.
+
+La definició d'un **VirtualHost** HTTPS senzill pot ser:
+~~~
+<VirtualHost *:443>
+        SSLEngine on
+        SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+        ServerName test.smx2.cat
+        ServerAdmin webmaster@smx2.cat
+        DocumentRoot /var/www/html/testsmx
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+~~~
+Aquesta configuració la podem afegir als fitxers de lloc ja creats per a HTTP, així podem respondre peticions amb els dos protocols.
+
+‼️ **Per tal que el nostre servidor permti connexions SSL/TLS pel port 443 hem d'habilitar el modul SSL.**
+
