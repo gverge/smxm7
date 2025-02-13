@@ -281,11 +281,11 @@ El resultat esperat ha d'incloure entre la resta de línies:
 * Trying 192.168.56.10:443
 ...
 * Connected to smx2.cat (192.168.56.10) port 443 (#0)
-```* ALPN, offering h2```
-* ALPN, offering http/1.1`
+* ALPN, offering h2  						# El client ofereix iniciar la comunicació amb HTTP/2
+* ALPN, offering http/1.1`					# o HTTP/1.1
 * ...
 * SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
-* ALPN, server accepted to use h2
+* ALPN, server accepted to use h2				# El servidor accepta HTTP/2
 ...
 * Using HTTP2, server supports multiplexing
 * Connection state changed (HTTP/2 confirmed)``
