@@ -2,9 +2,9 @@
 ### Índex de Contingut
 - [El protocol HTTP](#punt1)
 - [El servidor Apache](#punt2)
-  -[Autenticació d'accés bàsic amb HTTP](#punt2.1)
-  -[Diversos llocs amb la directiva VirtualHost](#punt2.2)
-  -[Web segura amb HTTPS](#punt2.3)
+  - [Autenticació d'accés bàsic amb HTTP](#punt2.1)
+  - [Diversos llocs amb la directiva VirtualHost](#punt2.2)
+  - [Web segura amb HTTPS](#punt2.3)
 
 <hr>
 
