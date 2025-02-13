@@ -5,6 +5,8 @@
   - [Autenticació d'accés bàsic amb HTTP](#punt2.1)
   - [Diversos llocs amb la directiva VirtualHost](#punt2.2)
   - [Web segura amb HTTPS](#punt2.3)
+  - [Rendiment amb HTTP/2](#punt2.4)
+  - 
 
 <hr>
 
@@ -251,3 +253,46 @@ Aquesta configuració la podem afegir als fitxers de lloc ja creats per a HTTP, 
 
 ‼️ **Per tal que el nostre servidor permti connexions SSL/TLS pel port 443 hem d'habilitar el modul SSL.**
 
+### Rendiment amb HTTP/2 <a name="punt2.4"></a>
+
+**HTTP/2** és la darrera versió del protocol HTTP i introdueix molts canvis orientats a aconseguir un millor rendiment. La nova versió del protocol està disponible combinada amb TLS i sense **TLS**, però els navegadors només accepten la versió xifrada. Així que a la pràctica, per a un servidor web, utilitzar HTTP/2 vol dir utilitzar també TLS.
+
+Els noms que reben aquests protocols són:
+- **h2**: versió del protocol xifrada amb TLS.
+- **h2c**: versió del protocol en text clar sense xifrar.
+
+Naturalment el servidor web Apache HTTP Server suporta la darrera versió del protocol HTTP ( h2 i h2c). Per utilitzar h2 serà necessari:
+- Tenir activat el mòdul **``mod_ssl``**.
+- Activar el mòdul **``mod_http2``**.
+- Utilitzar la directiva **``Protocols``** per indicar els protocols suportats. Per exemple, afegint la següent línia al nostre VirtualHost:
+~~~
+<VirtualHost _default_:443 >
+	...
+        Protocols h2 http/1.1 #Permetem atendre amb HTTP/2 xifrat els clients que el suportin i amb HTTP/1.1 els que no ho suportin.
+	...
+</VirtualHost>
+~~~
+
+### Apache com a proxy invers <a name="punt2.5"></a>
+
+Quan Apache funciona com un servidor intermediari invers sembla el servidor que publica els continguts però, en realitat, cada petició rebuda es trasllada a un altre servidor web —ocult per als clients— que torna el contingut sol·licitat.
+
+La raó més habitual per tenir un servidor intermediari invers és la seguretat, per exemple per publicar amb HTTPS o HTTP/2 una aplicació web interna que només ofereix HTTP.
+
+Una altra raó pot ser millorar el rendiment en balancejar les peticions dels clients entre un grup de servidors interns.
+
+El mòdul bàsic per fer de proxy és **``mod_proxy``**. Però aquest mòdul necessitarà que també s'activi **``mod_proxy_http``** si es contactarà amb el servidor intern amb HTTP/0.9, HTTP/1.0 o HTTP/1.1 i **``mod_proxy_http2``** si s'utilitzarà HTTP/2.
+
+Per exemple, suposant que volem preparar un VirtualHost per servir amb HTTP/2 i HTTPS una aplicació web HTTP/1.1 que es troba al servidor 172.16.0.19 podríem utilitzar aquesta configuració bàsica:
+~~~
+<VirtualHost *:443>
+	ServerAdmin webmaster@localhost
+        Protocols h2 http/1.1
+	SSLEngine on
+	SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	ProxyPass "/" "http://172.16.0.19/"
+	ProxyPassReverse "/" "http://172.16.0.19/" 
+</VirtualHost>
+~~~
+Encara que depenent de l'aplicació poden ser necessaris altres ajustaments.
