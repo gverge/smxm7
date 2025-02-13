@@ -277,23 +277,19 @@ Podem comprovar el correcte funcionament del nostre servidor amb HTTP/2 utilitza
 curl -vso /dev/null --http2 https://smx2.cat --insecure
 ~~~
 El resultat esperat ha d'incloure entre la resta de línies:
-<pre>
-	dfgdsfgds
-	dsfgdsfgdsg
-	dsfgdsfgfds
-	**dsfgdsfg**
-</pre>
-``* Trying 192.168.56.10:443...``\
-``* Connected to smx2.cat (192.168.56.10) port 443 (#0)``\
-**``* ALPN, offering h2``**\
-**``* ALPN, offering http/1.1``**\
-``...``\
-``* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384``\
-**``* ALPN, server accepted to use h2``**\
-``...``\
-**``* Using HTTP2, server supports multiplexing``**\
-**``* Connection state changed (HTTP/2 confirmed)``**\
-
+~~~
+* Trying 192.168.56.10:443
+...
+* Connected to smx2.cat (192.168.56.10) port 443 (#0)
+```* ALPN, offering h2```
+* ALPN, offering http/1.1`
+* ...
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN, server accepted to use h2
+...
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)``
+~~~
 ### Apache com a proxy invers <a name="punt2.5"></a>
 
 Quan Apache funciona com un servidor intermediari invers sembla el servidor que publica els continguts però, en realitat, cada petició rebuda es trasllada a un altre servidor web —ocult per als clients— que torna el contingut sol·licitat.
