@@ -277,6 +277,12 @@ Podem comprovar el correcte funcionament del nostre servidor amb HTTP/2 utilitza
 curl -vso /dev/null --http2 https://smx2.cat --insecure
 ~~~
 El resultat esperat ha d'incloure entre la resta de línies:
+<pre>
+	dfgdsfgds
+	dsfgdsfgdsg
+	dsfgdsfgfds
+	**dsfgdsfg**
+</pre>
 ``* Trying 192.168.56.10:443...``\
 ``* Connected to smx2.cat (192.168.56.10) port 443 (#0)``\
 **``* ALPN, offering h2``**\
