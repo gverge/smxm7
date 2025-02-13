@@ -175,6 +175,11 @@ Després podreu utilitzar una directiva **``<Directory>``** per canviar la confi
 </ Directory > 
 ~~~
 
+‼️ **Si nencessiteu agrupar usuaris recordeu habilitar el mòdul d'autorització de grups ``authz_groupfile``** i afegir les directives apropiades a ``Directory``:
+~~~
+	AuthGroupFile "/var/www/groups"
+	Require group usersgroup
+~~~
 La directiva Require també ens permetrà entre altres funcions:
 - Utilitzar **``Require valid-user``** per acceptar qualsevol usuari del fitxer de contrasenyes.
 - Especificar una llista d'usuaris vàlids: **``Require user usuari1 usuari2 usuari3``**
