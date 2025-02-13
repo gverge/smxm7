@@ -6,6 +6,7 @@
   - [Diversos llocs amb la directiva VirtualHost](#punt2.2)
   - [Web segura amb HTTPS](#punt2.3)
   - [Rendiment amb HTTP/2](#punt2.4)
+  - [Apache com a proxy invers](#punt2.5)
   
 <hr>
 
