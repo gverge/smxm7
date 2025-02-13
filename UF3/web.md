@@ -6,8 +6,7 @@
   - [Diversos llocs amb la directiva VirtualHost](#punt2.2)
   - [Web segura amb HTTPS](#punt2.3)
   - [Rendiment amb HTTP/2](#punt2.4)
-  - 
-
+  
 <hr>
 
 Les pàgines web, en la seva majoria en format **HTML**, requereixen ser allotjades en màquines que disposin d’espai en disc per emmagatzemar arxius HTML, imatges, blocs de codi o arxius de vídeo en directoris específics i, alhora, han de ser capaces d’entendre tot tipus d’extensió dels arxius que són enviats en tots dos sentits de la comunicació. 
