@@ -153,7 +153,7 @@ Apache HTTP Server pot protegir amb autenticació daccés bàsic HTTP alguns rec
 
 Per posar en marxa l'autenticació bàsica convé crear un fitxer de contrasenyes on es registraran els usuaris i contrasenyes. Aquest fitxer es gestiona amb l'ordre **``htpasswd``** i hauria d'estar fora de qualsevol **DocumentRoot** per evitar que el servidor el publiqui a la web.
 
-Per exemple, per crear el fitxer de contrasenyes **`/var/www/passwords``** i desar-hi l'usuari:
+Per exemple, per crear el fitxer de contrasenyes **``/var/www/passwords``** i desar-hi l'usuari:
 ~~~
 root@apache:/var/www# htpasswd -c passwords usuari1
 New password: 
