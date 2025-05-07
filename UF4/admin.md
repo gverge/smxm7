@@ -5,8 +5,8 @@
 
 ## Wireguard VPN <a name="punt2"></a>
 Una VPN (Virtual Private Network o xarxa privada virtual) recrea mitjançant programari i xifrat una xarxa que no existeix a nivell físic però que permet comunicar de manera segura als equips que hi participen.
+<p align=center><img src="https://commons.wikimedia.org/wiki/File:VPN_overview-en.svg" width=400></p>
 
-https://commons.wikimedia.org/wiki/File:VPN_overview-en.svg
 
 El trànsit de la VPN acaba transmetent-se pels adaptadors de xarxa i la infraestructura física que comunica els equips, però abans de transmetre aquest trànsit es xifra i s'encapsula en paquets que el transporten fins a la destinació. A la destinació, quan es reben les dades, es desxifren i es recomponen els paquets virtuals transmesos per la VPN.
 
