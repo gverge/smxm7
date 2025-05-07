@@ -32,7 +32,7 @@ WireGuard està disponible als repositoris de les principals distribucions de GN
 
 La instal·lació a Ubuntu es pot realitzar amb una ordre:
 
-```# apt install wireguard-tools```
+```# apt install wireguard```
 
 Un cop instal·lat es podrà utilitzar l'eina wg.
 
