@@ -67,7 +67,7 @@ Cada equip a la VPN utilitzarà dues claus: pública i privada.
 
 Aquestes claus es poden generar amb la següent ordre:
 
-```umask 077; wg genkey | tee privatekey | wg pubkey > publickey```
+```wg genkey | tee privatekey | wg pubkey > publickey```
 
 Després d'executar l'ordre s'hauran creat els fitxers: 
 
